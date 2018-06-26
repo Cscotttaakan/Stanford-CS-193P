@@ -8,29 +8,25 @@
 
 import Foundation
 
-//No inheritance in struct, similar to class
-//Structs are value types, classes are reference types
-//What does that mean?
-//Value type, copied
-//Classes, pointed to
-struct Card
-{
-    
+// No inheritance in struct, similar to class
+// Structs are value types, classes are reference types
+// What does that mean?
+// Value type, copied
+// Classes, pointed to
+struct Card {
+    let identifier: Int
     var isFaceUp = false
     var isMatched = false
-    var isSeen = false;
-    var identifier: Int
+    var isSeen = false
     
     static var identifierFactory = 0
     
-    static func getUniqueIdentifier() -> Int{
-        
+    static func getUniqueIdentifier() -> Int {
         identifierFactory += 1
         return identifierFactory
     }
     
-    init()
-    {
+    init() {
         self.identifier = Card.getUniqueIdentifier()
     }
 }
