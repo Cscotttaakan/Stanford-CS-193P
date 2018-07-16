@@ -93,24 +93,25 @@ class ViewController: UIViewController {
     }
     
     @objc private func updateTimer(){
-        if(time == game.competitor.difficulty.rawValue){
-            
+        if game.wonRound{
+            game.competitor.state = .Lost
+            time = 0
+            game.wonRound = false
+        }
+        else if(time == game.competitor.difficulty.rawValue && !game.wonRound){
+            time = 0
             if(game.findSet()){
-                time = 0
+ 
+
+                game.competitor.state = .Win
+                game.removeSet()
+                game.wonRound = false
+                game.Score -= 2
                 
-                switch(game.wonRound){
-                case true:
-                    game.competitor.state = .Lost
-                case false:
-                    game.competitor.state = .Win
-                    game.removeSet()
-                    game.wonRound = false
-                    game.Score -= 2
-                }
             }
             else{
                 game.addCards()
-                time = 0
+                
                 print("No set in cards")
             }
             
