@@ -12,12 +12,12 @@ import UIKit
 class Set{
     var cards = [Card]()
     var competitor = Computer()
-    var cardsInPlay :[Int:Card] = [Int:Card]()
+    var cardsInPlay : [Int:Card] = [Int:Card]()
     var cardsHighlighted :[Int:Card] = [Int:Card]()
     var Score : Int = 0
     var wonRound = false
     private let startingCards = 12
-    private let maxCards = 24
+    let maxCards = 24
     
     
     init(){
@@ -50,10 +50,12 @@ class Set{
             cardsHighlighted.removeValue(forKey: index)
         }
         else if(cardsHighlighted.count == 3){
+            
             if(checkSet(set: cardsHighlighted)){
-                removeSet()
+                
                 Score += 1
                 wonRound = true
+                removeSet()
                 //gain points
             }
             else{
@@ -101,13 +103,18 @@ class Set{
                 }
         }
     }
+    
     //Removes simultaneously the 3 cards in cardsHighlighted and 3 cards from cardsInPlay
+    func clearHighlight(){
+        
+        cardsHighlighted.removeAll()
+    }
+    
     func removeSet(){
         for key in cardsHighlighted.keys{
             cardsInPlay.removeValue(forKey: key)
         }
-        cardsHighlighted.removeAll()
-        
+        clearHighlight()
     }
     
     //Iterate through cards and check individual matches... For set conformance, match should either be 0 or 2, none or all match

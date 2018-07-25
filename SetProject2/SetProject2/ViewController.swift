@@ -27,6 +27,7 @@ class ViewController: UIViewController {
 
     @IBOutlet weak var Score: UILabel!
     @IBAction func addCards(_ sender: UIButton) {
+        resetOnGoingGame()
         game.addCards()
         updateViewFromModel()
     }
@@ -40,13 +41,21 @@ class ViewController: UIViewController {
         }
     }
     
+    func resetOnGoingGame(){
+        updateViewFromModel()
+        time = 0
+        game.clearHighlight()
+    }
+    
     @IBOutlet var cardButtons: [UIButton]!
     
     @IBAction func TouchCard(_ sender: UIButton) {
         
         if let cardNumber = cardButtons.index(of: sender){
+            updateViewFromModel()
             game.chooseCard(index: cardNumber)
             updateViewFromModel()
+            
             
         }else{
             
@@ -68,14 +77,16 @@ class ViewController: UIViewController {
     }
     
     private func drawCards(){
-        for index in 0..<game.cardsInPlay.count{
-            cardButtons[index].draw(string: game.cardsInPlay[index]?.rawValue())
+        for index in 0..<game.maxCards{
+            if let card = game.cardsInPlay[index]{
+            cardButtons[index].draw(string: cardToString(from: card))
+            }
         }
     }
     
     private func drawHighlighted(){
         for key in game.cardsHighlighted.keys{
-            cardButtons[key].drawHighlighted(string: game.cardsInPlay[key]?.rawValue())
+            cardButtons[key].highlight()
         }
     }
     
@@ -98,8 +109,9 @@ class ViewController: UIViewController {
             time = 0
             game.wonRound = false
         }
+            
         else if(time == game.competitor.difficulty.rawValue && !game.wonRound){
-            time = 0
+            resetOnGoingGame()
             if(game.findSet()){
  
 
@@ -111,8 +123,6 @@ class ViewController: UIViewController {
             }
             else{
                 game.addCards()
-                
-                print("No set in cards")
             }
             
         }
@@ -139,9 +149,8 @@ extension UIButton{
         self.setAttributedTitle(string,for: UIControlState.normal)
     }
     
-    func drawHighlighted(string : NSAttributedString?){
+    func highlight(){
         self.layer.borderColor = UIColor.blue.cgColor
-        self.setAttributedTitle(string,for: UIControlState.normal)
     }
     
     func remove(){
@@ -149,6 +158,52 @@ extension UIButton{
         self.layer.borderColor = UIColor.clear.cgColor
         self.setAttributedTitle(nil, for: UIControlState.normal)
     }
+}
+
+extension ViewController{
+    
+    func cardToString(from card : Card) -> NSAttributedString{
+        var strokeTextAttributes : [NSAttributedStringKey:Any] = [NSAttributedStringKey:Any]()
+        var manipulatedValue : String = ""
+        
+        for _ in 0..<card.number.rawValue{
+            manipulatedValue.append(card.shape.rawValue)
+        }
+        
+        switch(card.color){
+        case .Blue:
+            strokeTextAttributes[.strokeColor] = UIColor.blue
+            strokeTextAttributes[.foregroundColor] = UIColor.blue
+        case .Green:
+            strokeTextAttributes[.strokeColor] = UIColor.green
+            strokeTextAttributes[.foregroundColor] = UIColor.green
+        case .Red:
+            strokeTextAttributes[.strokeColor] = UIColor.red
+            strokeTextAttributes[.foregroundColor] = UIColor.red
+        default:
+            break
+        }
+        
+        switch(card.shading){
+        case .Solid:
+            strokeTextAttributes[.strokeWidth] = -2
+        case .Outlined:
+            strokeTextAttributes[.strokeWidth] = 10
+            strokeTextAttributes[.strokeColor] = (strokeTextAttributes[.strokeColor] as! UIColor).withAlphaComponent(1.0)
+            strokeTextAttributes[.foregroundColor] = (strokeTextAttributes[.strokeColor] as! UIColor).withAlphaComponent(1.0)
+        case .Striped:
+            strokeTextAttributes[.strokeWidth] = -1
+            strokeTextAttributes[.strokeColor] = (strokeTextAttributes[.strokeColor] as! UIColor).withAlphaComponent(0.35)
+            strokeTextAttributes[.foregroundColor] = (strokeTextAttributes[.strokeColor] as! UIColor).withAlphaComponent(0.35)
+        default:
+            strokeTextAttributes[.strokeWidth] = 0
+        }
+        
+        return NSAttributedString(string: manipulatedValue, attributes: strokeTextAttributes)
+        
+
+    }
+    
 }
 
 

@@ -35,13 +35,9 @@ struct Card : Equatable{
     private(set) var shading : Shading = Shading.none
     
     private(set) var properties: [Property]
-    private var strokeTextAttributes : [NSAttributedStringKey:Any] = [NSAttributedStringKey:Any]()
-    private var manipulatedValue : String = ""
-    private var value : NSAttributedString?
     
     init(shape : Shape, color : Color, number : Number, shading : Shading){
         
-        /*properties = [AnyProperty(shape),AnyProperty(color),AnyProperty(number),AnyProperty(shading)] */
         
         self.color = color
         self.number = number
@@ -50,50 +46,10 @@ struct Card : Equatable{
         
         properties = [AnyProperty(shape),AnyProperty(color),AnyProperty(number),AnyProperty(shading)]
         
-        addProperty(attribute: shape)
-        addProperty(attribute: color)
-        addProperty(attribute: number)
-        addProperty(attribute: shading)
-        
-        value = NSAttributedString(string: manipulatedValue, attributes: strokeTextAttributes)
+
         
         }
-    //Spits back the rawValue of the card in NSAttributed String Form
-    mutating func rawValue() -> NSAttributedString?{
-        
-        return value
-    }
-    //Takes in specific state and adds Dictionary definition to strokeAttributes using rawValue
-    mutating func addProperty(attribute: Property){
-        if( attribute is Shape){
-            let tempShape = attribute as! Shape
-            manipulatedValue = tempShape.rawValue
-        }else if(attribute is Color){
-            let tempColor = attribute as! Color
-            strokeTextAttributes.merge(tempColor.rawValue, uniquingKeysWith: { _,_ in ((NSAttributedStringKey, Any) -> Any).self})
-        }else if(attribute is Number){
-            let tempNumber = attribute as! Number
-            let tempString = manipulatedValue
-            for _ in 0..<tempNumber.rawValue-1{
-                manipulatedValue.append(tempString)
-            }
-        }else if(attribute is Shading){
-            let tempShading = attribute as! Shading
-            strokeTextAttributes.merge(tempShading.rawValue, uniquingKeysWith: { _,_ in ((NSAttributedStringKey, Any) -> Any).self})
-            switch(tempShading)
-            {
-            case .Striped:
-                strokeTextAttributes[.strokeColor] = color.rawValue[.strokeColor]?.withAlphaComponent(0.25)
-                strokeTextAttributes[.foregroundColor] = color.rawValue[.strokeColor]?.withAlphaComponent(0.25)
-            case.Outlined:
-                strokeTextAttributes[.foregroundColor] = color.rawValue[.strokeColor]?.withAlphaComponent(1.0)
-            default:
-                strokeTextAttributes[.strokeColor] = color.rawValue[.strokeColor]
-                strokeTextAttributes[.foregroundColor] = color.rawValue[.strokeColor]
-            }
-            
-        }
-    }
+
     
 }
         
@@ -116,7 +72,7 @@ struct AnyProperty<P: Property>: Property,Equatable{
         else if lhs.property is Color{
             let left = lhs.property as! Color
             let right = rhs.property as! Color
-            return left.rawValue[NSAttributedStringKey.strokeColor] == right.rawValue[.strokeColor]
+            return left == right
         }
         else if lhs.property is Number{
             let left = lhs.property as! Number
@@ -126,7 +82,7 @@ struct AnyProperty<P: Property>: Property,Equatable{
         else{
             let left = lhs.property as! Shading
             let right = rhs.property as! Shading
-            return left.rawValue[.strokeWidth] == right.rawValue[.strokeWidth]
+            return left == right
         }
     }
     
@@ -167,9 +123,10 @@ enum Number : Int,Property{
     case One = 1
     case Two = 2
     case Three = 3
-    case none
+    case none = 0
     
     static var allValues : [Property] {return [Number.One,Number.Two,Number.Three]}
+    
 }
 
 enum Shading:Property {
@@ -182,63 +139,4 @@ enum Shading:Property {
 }
 
 
-
-//Create raw value in the form of Dictionary to add to textAttributes
-extension Color:RawRepresentable{
-    init?(rawValue: [NSAttributedStringKey : UIColor]) {
-        switch(rawValue[.strokeColor]){
-        case UIColor.red?:
-                self = Color.Red
-        case UIColor.green?:
-                self = Color.Green
-            case UIColor.blue?:
-                self = Color.Blue
-            default:
-                self = Color.none
-        }
-    }
-    
-    var rawValue: [NSAttributedStringKey:UIColor] {
-        switch(self){
-            case .Red:
-                return [.strokeColor:UIColor.red,.foregroundColor: UIColor.red]
-            case .Green:
-                return [.strokeColor:UIColor.cyan,.foregroundColor: UIColor.cyan]
-            case .Blue:
-                return [.strokeColor:UIColor.blue,.foregroundColor: UIColor.blue]
-            default:
-                return [.strokeColor:UIColor.clear,.foregroundColor: UIColor.clear]
-        }
-    }
-
-}
-//Create raw representable to add to stroke text attributes
-extension Shading:RawRepresentable{
-    init?(rawValue: [NSAttributedStringKey : Int]) {
-        switch rawValue[.strokeWidth]!{
-        case -2:
-            self = Shading.Solid
-        case 10:
-            self = Shading.Outlined
-        case -1:
-            self = Shading.Striped
-        default:
-            self = Shading.none
-        }
-    }
-    
-    var rawValue: [NSAttributedStringKey: Int] {
-        switch(self){
-        case .Solid:
-            return [.strokeWidth:-2]
-        case .Outlined:
-            return [.strokeWidth: 10]
-        case .Striped:
-            return [.strokeWidth: -1]
-        default:
-            return [.strokeColor:0]
-        }
-    }
-    
-}
 
