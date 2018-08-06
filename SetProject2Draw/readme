@@ -1,0 +1,7 @@
+Here is a partial list of concepts this assignment is intended to let you gain practice with
+or otherwise demonstrate your knowledge of.
+1. Creating a custom UIView with a draw(CGRect) method
+2. Gestures
+3. Understanding the UIView hierarchy
+4. Creating UIViews in code (rather than in Interface Builder)
+5. Drawing with Core Graphics and UIBezierPath
