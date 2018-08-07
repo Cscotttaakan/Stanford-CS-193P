@@ -15,8 +15,8 @@
 		E122F4D921082A1D004D5950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E122F4D721082A1D004D5950 /* Main.storyboard */; };
 		E122F4DB21082A1D004D5950 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122F4DA21082A1D004D5950 /* Assets.xcassets */; };
 		E122F4DE21082A1D004D5950 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E122F4DC21082A1D004D5950 /* LaunchScreen.storyboard */; };
+		E147F54821193D41006ADF71 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147F54721193D41006ADF71 /* Grid.swift */; };
 		E1A7D7E9210D25FC00990089 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A7D7E8210D25FC00990089 /* CardView.swift */; };
-		E1C98C252116BC53007EBA2F /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1C98C242116BC53007EBA2F /* Grid.swift */; };
 		E1C98C2721178BD6007EBA2F /* Outline.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E1C98C2621178BD6007EBA2F /* Outline.rtf */; };
 /* End PBXBuildFile section */
 
@@ -31,8 +31,8 @@
 		E122F4DA21082A1D004D5950 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		E122F4DD21082A1D004D5950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E122F4DF21082A1D004D5950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		E147F54721193D41006ADF71 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
 		E1A7D7E8210D25FC00990089 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
-		E1C98C242116BC53007EBA2F /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Grid.swift; path = ../../../../Downloads/Grid.swift; sourceTree = "<group>"; };
 		E1C98C2621178BD6007EBA2F /* Outline.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Outline.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -69,7 +69,7 @@
 				E10362A021082B1D004C14FF /* Card.swift */,
 				E10362A121082B1D004C14FF /* computer.swift */,
 				E103629F21082B1D004C14FF /* Set.swift */,
-				E1C98C242116BC53007EBA2F /* Grid.swift */,
+				E147F54721193D41006ADF71 /* Grid.swift */,
 				E1A7D7E8210D25FC00990089 /* CardView.swift */,
 				E122F4D521082A1D004D5950 /* ViewController.swift */,
 				E122F4E521082A2A004D5950 /* SupportingFiles */,
@@ -166,7 +166,7 @@
 				E122F4D621082A1D004D5950 /* ViewController.swift in Sources */,
 				E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */,
 				E10362A421082B1D004C14FF /* computer.swift in Sources */,
-				E1C98C252116BC53007EBA2F /* Grid.swift in Sources */,
+				E147F54821193D41006ADF71 /* Grid.swift in Sources */,
 				E10362A221082B1D004C14FF /* Set.swift in Sources */,
 				E1A7D7E9210D25FC00990089 /* CardView.swift in Sources */,
 				E10362A321082B1D004C14FF /* Card.swift in Sources */,

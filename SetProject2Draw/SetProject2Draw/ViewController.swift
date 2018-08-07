@@ -23,20 +23,21 @@ class ViewController: UIViewController {
         super.viewDidLoad()
         // initialize button styles
         /*
-        for index in 0..<cardButtons.count{
-            cardButtons[index].layer.borderWidth = 3.0
-            cardButtons[index].layer.cornerRadius = 8.0
-            cardButtons[index].tintColor = UIColor.clear
-            cardButtons[index].remove()
-        }*/
+         for index in 0..<cardButtons.count{
+         cardButtons[index].layer.borderWidth = 3.0
+         cardButtons[index].layer.cornerRadius = 8.0
+         cardButtons[index].tintColor = UIColor.clear
+         cardButtons[index].remove()
+         }*/
         
         /* gridView.cellCount = game.maxCards
-        for index in 0..<gridView.cellCount{
-            
-            let customView : CardView = CardView(frame: gridView[index]!, shape: .Circle, color: .Blue, number: .One, shading: .Striped)
-            self.view.addSubview(customView)
-        } */
+         for index in 0..<gridView.cellCount{
+         
+         let customView : CardView = CardView(frame: gridView[index]!, shape: .Circle, color: .Blue, number: .One, shading: .Striped)
+         self.view.addSubview(customView)
+         } */
         addSwipe()
+        addRotate()
     }
     
     override func viewDidLayoutSubviews() {
@@ -113,32 +114,33 @@ class ViewController: UIViewController {
     private func drawCards(){
         gridView.cellCount = game.cardsInPlay.count
         /*var index = 0
-        for tuple in game.cardsInPlay{
-            if let frame = gridView[index]{
-                let card = tuple.value
-                let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
-                let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
-                if game.cardsHighlighted[index] != nil{
-                    customView.highlightBorder()
-                }
-                else{
-                    customView.regularBorder()
-                }
-                customView.addGestureRecognizer(tap)
-                GridView.addSubview(customView)
-                cards.append(customView)
-                
-            }
-
-            index += 1
-        }*/
-    
+         for tuple in game.cardsInPlay{
+         if let frame = gridView[index]{
+         let card = tuple.value
+         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+         let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
+         if game.cardsHighlighted[index] != nil{
+         customView.highlightBorder()
+         }
+         else{
+         customView.regularBorder()
+         }
+         customView.addGestureRecognizer(tap)
+         GridView.addSubview(customView)
+         cards.append(customView)
+         
+         }
+         
+         index += 1
+         }*/
+        
         
         for index in 0..<game.cardsInPlay.count{
             
             if let frame = gridView[index]{
                 let card = game.cardsInPlay[index]
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+                
                 let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
                 if game.cardsHighlighted[index] != nil{
                     customView.highlightBorder()
@@ -147,6 +149,7 @@ class ViewController: UIViewController {
                     customView.regularBorder()
                 }
                 customView.addGestureRecognizer(tap)
+                
                 GridView.addSubview(customView)
                 cards.append(customView)
                 
@@ -155,15 +158,26 @@ class ViewController: UIViewController {
         }
     }
     
+    @objc func rotate(_ gestureRecognizer: UIRotationGestureRecognizer){
+        /*if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
+         gestureRecognizer.view?.transform = gestureRecognizer.view!.transform.rotated(by: gestureRecognizer.rotation)
+         gestureRecognizer.rotation = 0
+         }*/
+        
+            game.reshuffle()
+            updateViewFromModel()
+        
+    }
+    
     @objc func tap(_ sender: UITapGestureRecognizer){
         
         if let cardView = sender.view as? CardView{
             
             for cardNumber in 0..<cards.count{
                 if cardView == cards[cardNumber]{
-
-                   game.chooseCard(index: cardNumber)
-                   
+                    
+                    game.chooseCard(index: cardNumber)
+                    
                     
                 }
             }
@@ -179,9 +193,19 @@ class ViewController: UIViewController {
         self.view.addGestureRecognizer(gesture)
     }
     
+    private func addRotate(){
+        let twist = UIRotationGestureRecognizer(target: self, action: #selector(self.rotate(_:)))
+        self.view.addGestureRecognizer(twist)
+    }
+    
     @objc func swipeDown(_ sender: UITapGestureRecognizer){
-        game.addCards()
-        updateViewFromModel()
+        
+        
+            
+            game.addCards()
+            updateViewFromModel()
+            
+       
     }
     
     private func drawHighlighted(){
@@ -194,13 +218,13 @@ class ViewController: UIViewController {
     
     private func removeCardsNotInPlay(){
         /*for index in 0..<cardButtons.count{
-            if !game.cardsInPlay.keys.contains(index){
-                cardButtons[index].remove()
-            }
-        }*/
+         if !game.cardsInPlay.keys.contains(index){
+         cardButtons[index].remove()
+         }
+         }*/
     }
     
-
+    
     private func runTimer(){
         timer = Timer.scheduledTimer(timeInterval : 1,target : self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats : true)
     }
@@ -215,8 +239,8 @@ class ViewController: UIViewController {
         else if(time == game.competitor.difficulty.rawValue && !game.wonRound){
             resetOnGoingGame()
             if(game.findSet()){
- 
-
+                
+                
                 game.competitor.state = .Win
                 game.removeSet()
                 game.wonRound = false
@@ -247,25 +271,25 @@ class ViewController: UIViewController {
 
 //Create extension to "draw" the proper button based on NSAttributedString
 /* extension UIButton{
-    func draw(string : NSAttributedString?){
-        self.layer.borderColor = UIColor.black.cgColor
-        self.layer.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
-        self.setAttributedTitle(string,for: UIControlState.normal)
-    }
-    
-    func highlight(){
-        self.layer.borderColor = UIColor.blue.cgColor
-    }
-    
-    func remove(){
-        self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
-        self.layer.borderColor = UIColor.clear.cgColor
-        self.setAttributedTitle(nil, for: UIControlState.normal)
-    }
-    
+ func draw(string : NSAttributedString?){
+ self.layer.borderColor = UIColor.black.cgColor
+ self.layer.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
+ self.setAttributedTitle(string,for: UIControlState.normal)
+ }
  
-}
-*/
+ func highlight(){
+ self.layer.borderColor = UIColor.blue.cgColor
+ }
+ 
+ func remove(){
+ self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
+ self.layer.borderColor = UIColor.clear.cgColor
+ self.setAttributedTitle(nil, for: UIControlState.normal)
+ }
+ 
+ 
+ }
+ */
 
 
 

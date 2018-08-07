@@ -17,7 +17,8 @@ class Set{
     var Score : Int = 0
     var wonRound = false
     private let startingCards = 12
-    let maxCards = 81
+    var maxCards = 81
+    var currentCount = 0
     
     
     init(){
@@ -35,11 +36,20 @@ class Set{
             }
         }
         //Initialize randomized cards in play
-        for index in 0..<startingCards{
+        for _ in 0..<startingCards{
             let card = cards.remove(at: cards.count.arc4Random)
             cardsInPlay.append(card)
         }
         
+    }
+    
+    func reshuffle(){
+        var shuffledDeck : [Card] = [Card]()
+        currentCount = cardsInPlay.count
+        for _ in 0..<currentCount{
+            shuffledDeck.insert(cardsInPlay.popLast()!, at: shuffledDeck.count.arc4Random)
+        }
+        cardsInPlay = shuffledDeck
     }
     
     func chooseCard(index: Int)
@@ -52,7 +62,7 @@ class Set{
         else if(cardsHighlighted.count == 3){
             
             if(checkSet(set: cardsHighlighted)){
-                
+            
                 Score += 1
                 wonRound = true
                 removeSet()
