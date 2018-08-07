@@ -31,15 +31,36 @@ class ViewController: UIViewController {
     //Lazy allows us to call vars & their functions
     //without the var being initialized
     //Delayed assignment almost
-    lazy var game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
+    private lazy var game = Concentration(numberOfPairsOfCards :numberOfPairsOfCards)
     
+    var numberOfPairsOfCards: Int{
+                return (cardButtons.count+1)/2
+    }
     //Swift is extremely type-cast heavy, but also
     //type inference heavy.
     
+    private func updateFlipCount(count : Int){
+        let attributes: [NSAttributedStringKey:Any] = [
+            .strokeWidth: 5.0,
+            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+        ]
+        let attributedString = NSAttributedString(string: "Flips: \(count)",attributes :attributes )
+        flipCountLabel.attributedText = attributedString
+        
+    }
+    
+    private func initializeFlipCount(){
+        updateFlipCount(count: 0)
+    }
     
     
     //CMD + click -> rename
-    @IBOutlet weak var flipCountLabel: UILabel!
+    @IBOutlet weak var flipCountLabel: UILabel!{
+        didSet{
+            initializeFlipCount()
+        }
+    }
+    
     
     @IBOutlet weak var gameScore: UILabel!
     //Array of UIButtons
@@ -55,7 +76,7 @@ class ViewController: UIViewController {
     //We now have connected the second button
     //to this function.
     //We are now using array of labels in cardButtons variable
-    @IBAction func TouchCard(_ sender: UIButton) {
+    @IBAction private func TouchCard(_ sender: UIButton) {
         
         //The use of optionals:
         //--------------------
@@ -88,7 +109,7 @@ class ViewController: UIViewController {
     //Using update view from model, we only use cardButtons which is from
     //the story board. We then use the game variable to access its card
     //array. We drastically reduce code using this format.
-    func updateViewFromModel(){
+    private  func updateViewFromModel(){
         let count = game.flipCount
         let score = game.score
         for index in cardButtons.indices{
@@ -108,7 +129,7 @@ class ViewController: UIViewController {
             
         }
         
-        flipCountLabel.text = "Flips: \(count)";
+        updateFlipCount(count: count)
         gameScore.text = "Game Score: \(score)";
         
     }
@@ -162,7 +183,7 @@ class ViewController: UIViewController {
     
     
     
-    func emoji(for card: Card) -> String {
+    private func emoji(for card: Card) -> String {
         
         
         
@@ -172,10 +193,10 @@ class ViewController: UIViewController {
         // Then choose a random String from emojiChoices. Remove it from the array
         // Then return the new emoji for that card.
         // Why is it returning the same card for the one directly after it?
-        if game.emoji[card.identifier] == nil, game.emojiChoices.count > 0{
-            let randomIndex = Int(arc4random_uniform(UInt32(game.emojiChoices.count)))
-            
-            game.emoji[card.identifier] = game.emojiChoices.remove(at: randomIndex)
+        if game.emoji[card] == nil, game.emojiChoices.count > 0{
+            let randomIndex = game.emojiChoices.count.arc4Random
+            let randomStringIndex = game.emojiChoices.index(game.emojiChoices.startIndex, offsetBy: randomIndex)
+            game.emoji[card] = String(game.emojiChoices.remove(at: randomStringIndex))
             
         }
         
@@ -189,7 +210,7 @@ class ViewController: UIViewController {
     */
         
     //Short-hand way to write above
-        return game.emoji[card.identifier] ?? "?"
+        return game.emoji[card] ?? "?"
     }
 
 }

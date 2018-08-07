@@ -1,0 +1,56 @@
+Lecture 2 Notes: Model View Controller
+
+Three different principles.
+Controller -> talks to model
+Controller -> talks to view (outlet, talk to flipCount label)
+
+Model & View never speak to each other. Model is UI independent.
+View is generic. *Button, labels*
+
+View ->? Controller
+    Target(action), drag & drop the button to function
+    Delegate, is a var that checks if it has the ability to perform
+    functions.
+    Do not own data they are displaying.
+    Can ask for data at location, count
+
+Model ->Controller
+    Radio station, model relays that data has changed, so then controllers
+    change the model values.
+
+    Combine MVC for an application.
+    MVCs combine together.
+
+Quick Keys:
+    CMD + 0 : left pane
+    CMD + option + 0 : right pane
+        Add numbers: 1 2 3 4 to cycle through sub-windows
+
+    CMD + option + enter: Pops open second half pane, right side:
+    CMD + enter: close right side pane)
+
+    Xcode -> Preferences -> Navigation -> Focused Editor
+
+    CMD + Shift + O: shortcut to open search
+    Shift + Arrow: Highlight everything
+    CMD + / : Comment out lines *wow*
+    control + I: Auto indent
+    Shift + Command + Y : hide debug area
+// NOTES: Use this notes *The colon is important*, easy to navigate notes
+
+Use Progit
+
+Access Control:
+     Protecting internal implementations
+        internal: default accessible by any object in app or framework.
+        private: only callable from within object
+        private(set): can be readable outside, but not set
+        fileprivate: accessible by any code in this source file
+        public: outside framework can call
+        open: outside framework, can subclass, override
+
+    Assert: function call asserts something to be true, otherwise program crashes
+    enum: Value-type, get copied around
+
+Closures:
+    Nice to create on the fly functions as a parameter
