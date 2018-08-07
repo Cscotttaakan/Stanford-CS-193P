@@ -36,20 +36,33 @@ class Set{
             }
         }
         //Initialize randomized cards in play
+        dealCardsInPlay()
+        
+    }
+    
+    func dealCardsInPlay(){
         for _ in 0..<startingCards{
             let card = cards.remove(at: cards.count.arc4Random)
             cardsInPlay.append(card)
         }
-        
     }
     
     func reshuffle(){
+        
         var shuffledDeck : [Card] = [Card]()
-        currentCount = cardsInPlay.count
-        for _ in 0..<currentCount{
-            shuffledDeck.insert(cardsInPlay.popLast()!, at: shuffledDeck.count.arc4Random)
+        let inPlayCount = cardsInPlay.count
+        let deckCount = cards.count
+        
+        for _ in 0..<inPlayCount{
+            cards.insert(cardsInPlay.remove(at: (cardsInPlay.count - 1).arc4Random), at: cards.count.arc4Random)
         }
-        cardsInPlay = shuffledDeck
+        
+        for _ in 0..<deckCount{
+            shuffledDeck.insert(cards.remove(at: (cards.count - 1).arc4Random), at: shuffledDeck.count.arc4Random)
+        }
+        
+        cards = shuffledDeck
+        dealCardsInPlay()
     }
     
     func chooseCard(index: Int)
