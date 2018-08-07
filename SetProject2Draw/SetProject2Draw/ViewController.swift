@@ -163,9 +163,10 @@ class ViewController: UIViewController {
          gestureRecognizer.view?.transform = gestureRecognizer.view!.transform.rotated(by: gestureRecognizer.rotation)
          gestureRecognizer.rotation = 0
          }*/
-        
+        if(gestureRecognizer.state == .ended){
             game.reshuffle()
             updateViewFromModel()
+        }
         
     }
     
