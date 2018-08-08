@@ -24,7 +24,7 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ConcentrationViewController: UIViewController {
     
     
     //Classes in Swift get a free init, as long as vars are initialized
