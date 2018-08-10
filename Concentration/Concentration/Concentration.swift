@@ -21,8 +21,8 @@ struct Concentration{
     
     
     private(set) var cards = [Card]()
-    var emojiChoices : String
-    var emoji = [Card:String]()
+    
+    
     private(set)var score: Int = 0
 //    private var themes : [[String]] =
 //        [["☺️","😇","😎","😂","😍","😛"],
@@ -32,13 +32,10 @@ struct Concentration{
 //         ["🍏","🍎","🍐","🍊","🍋","🍌"],
 //         ["🚗","🚚","🚜","🏎","🚓","🚑"]]
     
-    private var themes : [String] =
-        ["☺️😇😎😂😍😛",
-         "👚👕👖👔👗👙",
-         "🐶🐱🐭🐹🐰🦊",
-         "🌕🌖🌗🌘🌑🌒",
+    
+         /*"🌕🌖🌗🌘🌑🌒",
          "🍏🍎🍐🍊🍋🍌",
-         "🚗🚚🚜🏎🚓🚑"]
+         "🚗🚚🚜🏎🚓🚑"]*/
     
     
     private(set) var flipCount = 0
@@ -95,7 +92,7 @@ struct Concentration{
     init(numberOfPairsOfCards: Int) {
         assert(numberOfPairsOfCards > 0, "Concentration.init: \(numberOfPairsOfCards)): chosen number not")
         //Create theme index to randomize which theme to choose
-        emojiChoices = themes[themes.count.arc4Random]
+        
         for _ in 1...numberOfPairsOfCards //Add card and randomly insert into cards
         {
             let card = Card()

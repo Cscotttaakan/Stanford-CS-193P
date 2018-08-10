@@ -25,8 +25,12 @@
 import UIKit
 
 class ConcentrationViewController: UIViewController {
-    
-    
+    var emoji = [Card:String]()
+    private var themes : [String] =
+        ["☺️😇😎😂😍😛",
+         "👚👕👖👔👗👙",
+         "🐶🐱🐭🐹🐰🦊"]
+    var emojiChoices : String = ""
     //Classes in Swift get a free init, as long as vars are initialized
     //Lazy allows us to call vars & their functions
     //without the var being initialized
@@ -193,10 +197,10 @@ class ConcentrationViewController: UIViewController {
         // Then choose a random String from emojiChoices. Remove it from the array
         // Then return the new emoji for that card.
         // Why is it returning the same card for the one directly after it?
-        if game.emoji[card] == nil, game.emojiChoices.count > 0{
-            let randomIndex = game.emojiChoices.count.arc4Random
-            let randomStringIndex = game.emojiChoices.index(game.emojiChoices.startIndex, offsetBy: randomIndex)
-            game.emoji[card] = String(game.emojiChoices.remove(at: randomStringIndex))
+        if emoji[card] == nil, emojiChoices.count > 0{
+            let randomIndex = emojiChoices.count.arc4Random
+            let randomStringIndex = emojiChoices.index(emojiChoices.startIndex, offsetBy: randomIndex)
+            emoji[card] = String(emojiChoices.remove(at: randomStringIndex))
             
         }
         
@@ -210,7 +214,7 @@ class ConcentrationViewController: UIViewController {
     */
         
     //Short-hand way to write above
-        return game.emoji[card] ?? "?"
+        return emoji[card] ?? "?"
     }
 
 }
