@@ -46,7 +46,7 @@ class ConcentrationViewController: UIViewController {
     private func updateFlipCount(count : Int){
         let attributes: [NSAttributedStringKey:Any] = [
             .strokeWidth: 5.0,
-            .strokeColor: #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+            .strokeColor: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         ]
         let attributedString = NSAttributedString(string: "Flips: \(count)",attributes :attributes )
         flipCountLabel.attributedText = attributedString
@@ -128,7 +128,7 @@ class ConcentrationViewController: UIViewController {
             }
             else{
                 button.setTitle("", for: UIControlState.normal);
-                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1)
+                button.backgroundColor = card.isMatched ? #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 0) : #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
             }
             
         }
