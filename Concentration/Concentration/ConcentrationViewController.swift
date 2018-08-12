@@ -9,18 +9,18 @@
 // In this demo, we are creating a flip card app.
 // ---------------------------------------------
 /*
-  Create buttons in the story board on the right hand column.
-  Resize and edit the object in attribute inspector in the right hand column.
+ Create buttons in the story board on the right hand column.
+ Resize and edit the object in attribute inspector in the right hand column.
  
-  We are utilizing Swift's UI Controller interface
-  to dynamically create functions.
-  You may drag and drop GUI elements into the ViewController.
+ We are utilizing Swift's UI Controller interface
+ to dynamically create functions.
+ You may drag and drop GUI elements into the ViewController.
  
-  On the top right, it shows two venn-diagram rings, click that to show both windows.
-  One window must contain the source code, and the other the storyboard.
+ On the top right, it shows two venn-diagram rings, click that to show both windows.
+ One window must contain the source code, and the other the storyboard.
  
-  You can drag and drop using: control and then dragging the element to the source code.
-*/
+ You can drag and drop using: control and then dragging the element to the source code.
+ */
 
 import UIKit
 
@@ -31,6 +31,13 @@ class ConcentrationViewController: UIViewController {
          "👚👕👖👔👗👙",
          "🐶🐱🐭🐹🐰🦊"]
     var emojiChoices : String = ""
+    
+    var theme : String?{ didSet{
+        emojiChoices = theme ?? ""
+        emoji = [:]
+        updateViewFromModel()
+        }
+    }
     //Classes in Swift get a free init, as long as vars are initialized
     //Lazy allows us to call vars & their functions
     //without the var being initialized
@@ -38,7 +45,9 @@ class ConcentrationViewController: UIViewController {
     private lazy var game = Concentration(numberOfPairsOfCards :numberOfPairsOfCards)
     
     var numberOfPairsOfCards: Int{
-                return (cardButtons.count+1)/2
+        
+        return (cardButtons.count+1)/2
+        
     }
     //Swift is extremely type-cast heavy, but also
     //type inference heavy.
@@ -76,8 +85,8 @@ class ConcentrationViewController: UIViewController {
     
     
     @IBAction func NewGame(_ sender: UIButton) {
-    game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
-    updateViewFromModel()
+        game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
+        updateViewFromModel()
     }
     
     
@@ -94,12 +103,12 @@ class ConcentrationViewController: UIViewController {
         //value
         if let cardNumber = cardButtons.index(of: sender)
         {
-        game.chooseCard(at: cardNumber)
+            game.chooseCard(at: cardNumber)
             
-        
-        updateViewFromModel()
+            
+            updateViewFromModel()
         }
-        
+            
         else{
             print("card not in array")
         }
@@ -158,11 +167,11 @@ class ConcentrationViewController: UIViewController {
     //We do this by dragging and dropping multiple buttons
     //to the same function.
     /*
-    @IBAction func TouchSecondCard(_ sender: UIButton) {
-        flipCount += 1;
-        flipCard(withEmoji: "🎃", on: sender)
-    }
-    */
+     @IBAction func TouchSecondCard(_ sender: UIButton) {
+     flipCount += 1;
+     flipCard(withEmoji: "🎃", on: sender)
+     }
+     */
     
     // Flip card takes in emoji and button class.
     // It then checks the contents of button against the emoji variable
@@ -172,20 +181,20 @@ class ConcentrationViewController: UIViewController {
     
     
     /*
-    func flipCard(withEmoji emoji: String, on button: UIButton)
-    {
-        if(button.currentTitle == emoji)
-        {
-            button.setTitle("", for: UIControlState.normal);
-            //Interestingly, you can set attributes to literals, click the box to change the color.
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1);
-        }
-        else{
-            button.setTitle(emoji, for: UIControlState.normal);
-            button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1);
-        }
-    }
- */
+     func flipCard(withEmoji emoji: String, on button: UIButton)
+     {
+     if(button.currentTitle == emoji)
+     {
+     button.setTitle("", for: UIControlState.normal);
+     //Interestingly, you can set attributes to literals, click the box to change the color.
+     button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1);
+     }
+     else{
+     button.setTitle(emoji, for: UIControlState.normal);
+     button.backgroundColor = #colorLiteral(red: 1, green: 0.5763723254, blue: 0, alpha: 1);
+     }
+     }
+     */
     
     
     
@@ -209,16 +218,16 @@ class ConcentrationViewController: UIViewController {
         }
         
         /*
-        if emoji[card.identifier] != nil{
-            return emoji[card.identifier]!
-        }
-        else{
-        return "?"
-    }
-    */
+         if emoji[card.identifier] != nil{
+         return emoji[card.identifier]!
+         }
+         else{
+         return "?"
+         }
+         */
         
-    //Short-hand way to write above
+        //Short-hand way to write above
         return emoji[card] ?? "?"
     }
-
+    
 }
