@@ -43,6 +43,9 @@ class ConcentrationViewController: UIViewController {
     //Swift is extremely type-cast heavy, but also
     //type inference heavy.
     
+    
+    
+    
     private func updateFlipCount(count : Int){
         let attributes: [NSAttributedStringKey:Any] = [
             .strokeWidth: 5.0,
@@ -56,6 +59,7 @@ class ConcentrationViewController: UIViewController {
     private func initializeFlipCount(){
         updateFlipCount(count: 0)
     }
+    
     
     
     //CMD + click -> rename
