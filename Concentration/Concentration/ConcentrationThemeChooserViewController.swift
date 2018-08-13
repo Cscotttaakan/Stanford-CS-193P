@@ -38,7 +38,9 @@ class ConcentrationThemeChooserViewController: UIViewController {
             navigationController?.pushViewController(cvc, animated: true)
         }
         else{
+            
             performSegue(withIdentifier: "Choose Theme", sender: sender)
+            
         }
     }
     

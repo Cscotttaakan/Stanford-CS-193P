@@ -127,6 +127,7 @@ class ConcentrationViewController: UIViewController {
     //the story board. We then use the game variable to access its card
     //array. We drastically reduce code using this format.
     private  func updateViewFromModel(){
+        guard cardButtons != nil else { return }
         let count = game.flipCount
         let score = game.score
         for index in cardButtons.indices{
