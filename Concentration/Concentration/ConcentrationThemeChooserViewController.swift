@@ -8,7 +8,22 @@
 
 import UIKit
 
-class ConcentrationThemeChooserViewController: UIViewController {
+class ConcentrationThemeChooserViewController: UIViewController, UISplitViewControllerDelegate {
+    
+    func splitViewController(_
+        splitViewController: UISplitViewController,
+                             collapseSecondary secondaryViewController: UIViewController,
+                             onto primaryViewController: UIViewController
+        ) -> Bool {
+        
+        if let cvc = secondaryViewController as? ConcentrationViewController{
+            if cvc.theme == nil{
+                return true
+            }
+        }
+        return false
+        
+    }
     
     private let themes : [String : String] =
         ["Emoji" : "☺️😇😎😂😍😛",
@@ -17,6 +32,10 @@ class ConcentrationThemeChooserViewController: UIViewController {
     
     private var splitViewDetailConcentrationViewController  : ConcentrationViewController? {
         return splitViewController?.viewControllers.last as? ConcentrationViewController
+    }
+    
+    override func awakeFromNib() {
+        splitViewController?.delegate = self
     }
     
     private var lastSeguedToConcentrationViewController : ConcentrationViewController?
