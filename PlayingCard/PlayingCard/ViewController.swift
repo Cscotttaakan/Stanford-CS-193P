@@ -19,7 +19,7 @@ class ViewController: UIViewController {
     @IBOutlet var cardViews: [PlayingCardView]!
     
     private var faceUpCardViews : [PlayingCardView] {
-        return cardViews.filter {$0.isFaceUp && !$0.isHidden }
+        return cardViews.filter {$0.isFaceUp && !$0.isHidden && $0.transform != CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0 ) && $0.alpha == 1.0}
     }
     
     private var faceUpCardViewsMatch : Bool  {
@@ -61,6 +61,7 @@ class ViewController: UIViewController {
                 print("The center of the current view before code is : \(chosenCardView.center)")
                 //If you remove this, it prevents the cards from increasing in size & teleporting
                 //If it is here, the cards teleport and increase in size
+                let tempPosition = chosenCardView.center
                 self.cardBehavior.removeItem(chosenCardView)
                 UIView.transition(with: chosenCardView,
                                   duration: 0.6,
@@ -69,15 +70,15 @@ class ViewController: UIViewController {
                                     chosenCardView.isFaceUp = !chosenCardView.isFaceUp
                 },
                                   completion: { finished in
-                                    
+                                    let cardsToAnimate = self.faceUpCardViews
                                     if self.faceUpCardViewsMatch{
                                         UIViewPropertyAnimator.runningPropertyAnimator(
                                             withDuration: 0.6,
                                             delay: 0,
                                             options: [],
                                             animations: {
-                                                self.faceUpCardViews.forEach { _ in
-                                                    //$0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
+                                                cardsToAnimate.forEach {
+                                                    $0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
                                                     print("Scale")
                                                 }
                                         }
@@ -88,24 +89,24 @@ class ViewController: UIViewController {
                                                     delay: 0,
                                                     options: [],
                                                     animations: {
-                                                        self.faceUpCardViews.forEach {
+                                                        cardsToAnimate.forEach {
                                                             $0.transform = CGAffineTransform.identity.scaledBy(x: 0.1, y: 0.1)
                                                             $0.alpha = 0
                                                         }
                                                 }
-                                                    /*,completion: { position in
-                                                        self.faceUpCardViews.forEach{
+                                                    ,completion: { position in
+                                                        cardsToAnimate.forEach{
                                                             $0.isHidden = true
                                                             $0.alpha = 1
                                                             $0.transform = .identity
                                                         }
-                                                }*/
+                                                }
                                                 )
                                         }
                                         )
                                         
-                                    } else if self.faceUpCardViews.count >= 2{
-                                        self.faceUpCardViews.forEach { cardView in
+                                    } else if cardsToAnimate.count >= 2{
+                                        cardsToAnimate.forEach { cardView in
                                             UIView.transition(with: cardView,
                                                               duration: 0.6,
                                                               options: [.transitionFlipFromLeft],
@@ -121,15 +122,16 @@ class ViewController: UIViewController {
                                     else{
                                         if !chosenCardView.isFaceUp{
                                             
-                                            self.cardBehavior.addItem(chosenCardView)
+                                           self.cardBehavior.addItem(chosenCardView)
                                             print("The center of the cardView after behavior is \(chosenCardView.center)")
                                             print("\n")
                                         }
                                     }
                 }
                 )
-                
+                chosenCardView.center = tempPosition
             }
+            
         default:
             break
         }

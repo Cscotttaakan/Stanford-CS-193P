@@ -14,8 +14,6 @@
 		E116F8C420E6FB4800AC9AE8 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E116F8C220E6FB4800AC9AE8 /* Main.storyboard */; };
 		E116F8C620E6FB4800AC9AE8 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E116F8C520E6FB4800AC9AE8 /* Assets.xcassets */; };
 		E116F8C920E6FB4800AC9AE8 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E116F8C720E6FB4800AC9AE8 /* LaunchScreen.storyboard */; };
-		E116F8D420E6FB4800AC9AE8 /* PlayingCardTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116F8D320E6FB4800AC9AE8 /* PlayingCardTests.swift */; };
-		E116F8DF20E6FB4800AC9AE8 /* PlayingCardUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116F8DE20E6FB4800AC9AE8 /* PlayingCardUITests.swift */; };
 		E116F8EE20E6FBDA00AC9AE8 /* PlayingCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = E116F8ED20E6FBDA00AC9AE8 /* PlayingCard.swift */; };
 		E18251782125090D00D7459A /* CardBehavior.swift in Sources */ = {isa = PBXBuildFile; fileRef = E18251772125090D00D7459A /* CardBehavior.swift */; };
 /* End PBXBuildFile section */
@@ -48,11 +46,7 @@
 		E116F8C820E6FB4800AC9AE8 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E116F8CA20E6FB4800AC9AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E116F8CF20E6FB4800AC9AE8 /* PlayingCardTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlayingCardTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E116F8D320E6FB4800AC9AE8 /* PlayingCardTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardTests.swift; sourceTree = "<group>"; };
-		E116F8D520E6FB4800AC9AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E116F8DA20E6FB4800AC9AE8 /* PlayingCardUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PlayingCardUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		E116F8DE20E6FB4800AC9AE8 /* PlayingCardUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCardUITests.swift; sourceTree = "<group>"; };
-		E116F8E020E6FB4800AC9AE8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E116F8ED20E6FBDA00AC9AE8 /* PlayingCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayingCard.swift; sourceTree = "<group>"; };
 		E18251772125090D00D7459A /* CardBehavior.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardBehavior.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -86,8 +80,6 @@
 			isa = PBXGroup;
 			children = (
 				E116F8BD20E6FB4800AC9AE8 /* PlayingCard */,
-				E116F8D220E6FB4800AC9AE8 /* PlayingCardTests */,
-				E116F8DD20E6FB4800AC9AE8 /* PlayingCardUITests */,
 				E116F8BC20E6FB4800AC9AE8 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -116,24 +108,6 @@
 				E116F8CA20E6FB4800AC9AE8 /* Info.plist */,
 			);
 			path = PlayingCard;
-			sourceTree = "<group>";
-		};
-		E116F8D220E6FB4800AC9AE8 /* PlayingCardTests */ = {
-			isa = PBXGroup;
-			children = (
-				E116F8D320E6FB4800AC9AE8 /* PlayingCardTests.swift */,
-				E116F8D520E6FB4800AC9AE8 /* Info.plist */,
-			);
-			path = PlayingCardTests;
-			sourceTree = "<group>";
-		};
-		E116F8DD20E6FB4800AC9AE8 /* PlayingCardUITests */ = {
-			isa = PBXGroup;
-			children = (
-				E116F8DE20E6FB4800AC9AE8 /* PlayingCardUITests.swift */,
-				E116F8E020E6FB4800AC9AE8 /* Info.plist */,
-			);
-			path = PlayingCardUITests;
 			sourceTree = "<group>";
 		};
 		E116F8EC20E6FB7B00AC9AE8 /* Supporting Files */ = {
@@ -292,7 +266,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E116F8D420E6FB4800AC9AE8 /* PlayingCardTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -300,7 +273,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E116F8DF20E6FB4800AC9AE8 /* PlayingCardUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
