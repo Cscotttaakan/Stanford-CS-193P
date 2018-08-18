@@ -88,13 +88,13 @@ class ViewController: UIViewController {
                                                             $0.alpha = 0
                                                         }
                                                 }
-                                                    ,completion: { position in
+                                                    /*,completion: { position in
                                                         self.faceUpCardViews.forEach{
                                                             $0.isHidden = true
                                                             $0.alpha = 1
                                                             $0.transform = .identity
                                                         }
-                                                }
+                                                }*/
                                                 )
                                         }
                                         )
@@ -108,14 +108,14 @@ class ViewController: UIViewController {
                                                                 cardView.isFaceUp = false
                                             },
                                                               completion: { finished in
-                                                                self.cardBehavior.addItem(cardView)
+                                                                //self.cardBehavior.addItem(cardView)
                                             }
                                             )
                                         }
                                     }
                                     else{
                                         if !chosenCardView.isFaceUp{
-                                            self.cardBehavior.addItem(chosenCardView)
+                                            //self.cardBehavior.addItem(chosenCardView)
                                         }
                                     }
                 }

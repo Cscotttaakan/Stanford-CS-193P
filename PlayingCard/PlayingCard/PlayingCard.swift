@@ -13,7 +13,7 @@ import Foundation
 struct PlayingCard : CustomStringConvertible {
     var suit : Suit
     var rank : Rank
-
+    
     var description: String { return "\(rank)\(suit)" }
     
     
@@ -63,6 +63,6 @@ struct PlayingCard : CustomStringConvertible {
             case .face(let kind): return String(kind)
             }
         }
-       
+        
     }
- }
+}
