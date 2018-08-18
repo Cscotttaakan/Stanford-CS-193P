@@ -58,7 +58,9 @@ class ViewController: UIViewController {
         switch recognizer.state{
         case .ended:
             if let chosenCardView = recognizer.view as? PlayingCardView{
-                cardBehavior.removeItem(chosenCardView)
+                //If you remove this, it prevents the cards from increasing in size & teleporting
+                //If it is here, the cards teleport and increase in size
+                self.cardBehavior.removeItem(chosenCardView)
                 UIView.transition(with: chosenCardView,
                                   duration: 0.6,
                                   options: [.transitionFlipFromLeft],
@@ -108,14 +110,14 @@ class ViewController: UIViewController {
                                                                 cardView.isFaceUp = false
                                             },
                                                               completion: { finished in
-                                                                //self.cardBehavior.addItem(cardView)
+                                                                self.cardBehavior.addItem(cardView)
                                             }
                                             )
                                         }
                                     }
                                     else{
                                         if !chosenCardView.isFaceUp{
-                                            //self.cardBehavior.addItem(chosenCardView)
+                                            self.cardBehavior.addItem(chosenCardView)
                                         }
                                     }
                 }
