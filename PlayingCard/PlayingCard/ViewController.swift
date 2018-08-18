@@ -58,6 +58,7 @@ class ViewController: UIViewController {
         switch recognizer.state{
         case .ended:
             if let chosenCardView = recognizer.view as? PlayingCardView{
+                print("The center of the current view before code is : \(chosenCardView.center)")
                 //If you remove this, it prevents the cards from increasing in size & teleporting
                 //If it is here, the cards teleport and increase in size
                 self.cardBehavior.removeItem(chosenCardView)
@@ -75,11 +76,13 @@ class ViewController: UIViewController {
                                             delay: 0,
                                             options: [],
                                             animations: {
-                                                self.faceUpCardViews.forEach {
-                                                    $0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
+                                                self.faceUpCardViews.forEach { _ in
+                                                    //$0.transform = CGAffineTransform.identity.scaledBy(x: 3.0, y: 3.0)
+                                                    print("Scale")
                                                 }
                                         }
                                             ,completion: { position in
+                                                
                                                 UIViewPropertyAnimator.runningPropertyAnimator(
                                                     withDuration: 0.75 ,
                                                     delay: 0,
@@ -117,7 +120,10 @@ class ViewController: UIViewController {
                                     }
                                     else{
                                         if !chosenCardView.isFaceUp{
+                                            
                                             self.cardBehavior.addItem(chosenCardView)
+                                            print("The center of the cardView after behavior is \(chosenCardView.center)")
+                                            print("\n")
                                         }
                                     }
                 }
