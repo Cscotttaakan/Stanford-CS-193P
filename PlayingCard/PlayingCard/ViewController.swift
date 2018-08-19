@@ -52,7 +52,7 @@ class ViewController: UIViewController {
     
     // Do any additional setup after loading the view, typically from a nib.
     
-    
+    var lastChosenCard : PlayingCardView?
     
     @objc func flipCard(_ recognizer: UITapGestureRecognizer){
         switch recognizer.state{
@@ -61,6 +61,7 @@ class ViewController: UIViewController {
                 print("The center of the current view before code is : \(chosenCardView.center)")
                 //If you remove this, it prevents the cards from increasing in size & teleporting
                 //If it is here, the cards teleport and increase in size
+                lastChosenCard = chosenCardView
                 let tempPosition = chosenCardView.center
                 self.cardBehavior.removeItem(chosenCardView)
                 UIView.transition(with: chosenCardView,
@@ -106,6 +107,7 @@ class ViewController: UIViewController {
                                         )
                                         
                                     } else if cardsToAnimate.count >= 2{
+                                        if chosenCardView == self.lastChosenCard{
                                         cardsToAnimate.forEach { cardView in
                                             UIView.transition(with: cardView,
                                                               duration: 0.6,
@@ -117,6 +119,7 @@ class ViewController: UIViewController {
                                                                 self.cardBehavior.addItem(cardView)
                                             }
                                             )
+                                        }
                                         }
                                     }
                                     else{
