@@ -37,6 +37,8 @@ class CardBehavior: UIDynamicBehavior {
         addChildBehavior(push)
     }
     
+    
+    
     func addItem( _ item : UIDynamicItem){
         collisionBehavior.addItem(item)
         itemBehavior.addItem(item)

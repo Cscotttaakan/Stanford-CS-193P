@@ -8,7 +8,8 @@
 
 import UIKit
 import CoreGraphics
-@IBDesignable
+
+
 class CardView: UIView {
 
     var color : Color
@@ -21,6 +22,7 @@ class CardView: UIView {
     var offsetY : CGFloat
     var cgColor : UIColor
     var maxShapeLength : CGFloat { return bounds.maxX / 4}
+    var isFaceUp = false { didSet{ setNeedsDisplay(); setNeedsLayout()  } }
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.
     
@@ -95,8 +97,10 @@ class CardView: UIView {
     }
     
     override func draw(_ rect: CGRect) {
-        let padding : CGFloat = 2
         let path = UIBezierPath()
+        if isFaceUp{
+        let padding : CGFloat = 2
+        
         // Drawing code
         for index in 1...number.rawValue{
             let spacing : CGFloat = offsetX * CGFloat(index)
@@ -120,6 +124,12 @@ class CardView: UIView {
         
         
     //drawCircle(with: path)
+        }else{
+            if let cardBackImage = UIImage(named: "cardBack",in: Bundle(for: self.classForCoder), compatibleWith: traitCollection){
+                
+                cardBackImage.draw(in: bounds)
+            }
+        }
         
     }
     

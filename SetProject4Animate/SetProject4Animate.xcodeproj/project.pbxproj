@@ -10,6 +10,8 @@
 		E10362A221082B1D004C14FF /* Set.swift in Sources */ = {isa = PBXBuildFile; fileRef = E103629F21082B1D004C14FF /* Set.swift */; };
 		E10362A321082B1D004C14FF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10362A021082B1D004C14FF /* Card.swift */; };
 		E10362A421082B1D004C14FF /* computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10362A121082B1D004C14FF /* computer.swift */; };
+		E11BE28D212A02BC001F9F2F /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BE28C212A02BC001F9F2F /* DeckView.swift */; };
+		E11BE28F212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */; };
 		E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F4D321082A1D004D5950 /* AppDelegate.swift */; };
 		E122F4D621082A1D004D5950 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F4D521082A1D004D5950 /* ViewController.swift */; };
 		E122F4D921082A1D004D5950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E122F4D721082A1D004D5950 /* Main.storyboard */; };
@@ -24,6 +26,8 @@
 		E103629F21082B1D004C14FF /* Set.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Set.swift; sourceTree = "<group>"; };
 		E10362A021082B1D004C14FF /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E10362A121082B1D004C14FF /* computer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = computer.swift; sourceTree = "<group>"; };
+		E11BE28C212A02BC001F9F2F /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
+		E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensionViewController.swift; sourceTree = "<group>"; };
 		E122F4D021082A1D004D5950 /* SetProject4Animate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetProject4Animate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E122F4D321082A1D004D5950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E122F4D521082A1D004D5950 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -50,7 +54,7 @@
 		E122F4C721082A1D004D5950 = {
 			isa = PBXGroup;
 			children = (
-				E122F4D221082A1D004D5950 /* SetProject3Draw */,
+				E122F4D221082A1D004D5950 /* SetProject4Animate */,
 				E122F4D121082A1D004D5950 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,7 +67,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		E122F4D221082A1D004D5950 /* SetProject3Draw */ = {
+		E122F4D221082A1D004D5950 /* SetProject4Animate */ = {
 			isa = PBXGroup;
 			children = (
 				E10362A021082B1D004C14FF /* Card.swift */,
@@ -71,14 +75,16 @@
 				E103629F21082B1D004C14FF /* Set.swift */,
 				E147F54721193D41006ADF71 /* Grid.swift */,
 				E1A7D7E8210D25FC00990089 /* CardView.swift */,
+				E11BE28C212A02BC001F9F2F /* DeckView.swift */,
 				E122F4D521082A1D004D5950 /* ViewController.swift */,
+				E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */,
 				E122F4E521082A2A004D5950 /* SupportingFiles */,
 				E122F4D721082A1D004D5950 /* Main.storyboard */,
 				E122F4DA21082A1D004D5950 /* Assets.xcassets */,
 				E122F4DF21082A1D004D5950 /* Info.plist */,
 				E1C98C2621178BD6007EBA2F /* Outline.rtf */,
 			);
-			path = SetProject3Draw;
+			path = SetProject4Animate;
 			sourceTree = "<group>";
 		};
 		E122F4E521082A2A004D5950 /* SupportingFiles */ = {
@@ -163,9 +169,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E11BE28F212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift in Sources */,
 				E122F4D621082A1D004D5950 /* ViewController.swift in Sources */,
 				E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */,
 				E10362A421082B1D004C14FF /* computer.swift in Sources */,
+				E11BE28D212A02BC001F9F2F /* DeckView.swift in Sources */,
 				E147F54821193D41006ADF71 /* Grid.swift in Sources */,
 				E10362A221082B1D004C14FF /* Set.swift in Sources */,
 				E1A7D7E9210D25FC00990089 /* CardView.swift in Sources */,

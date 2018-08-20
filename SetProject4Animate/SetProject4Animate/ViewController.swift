@@ -15,8 +15,16 @@ class ViewController: UIViewController {
     private var time = 0
     private var timer = Timer()
     private var cards : [CardView] = [CardView]()
+    private var dealCards : Bool = true
+    private var startGame : Bool = false
     @IBOutlet weak var GridView: UIView!
+    @IBOutlet weak var DiscardView: UIView!
+    @IBOutlet weak var DeckView: UIView!
     
+    @IBAction func startGame(_ sender: UIButton) {
+        recalculate(size: CGSize(width: GridView.frame.width, height: GridView.frame.height))
+        
+    }
     
     
     override func viewDidLoad() {
@@ -36,15 +44,31 @@ class ViewController: UIViewController {
          let customView : CardView = CardView(frame: gridView[index]!, shape: .Circle, color: .Blue, number: .One, shading: .Striped)
          self.view.addSubview(customView)
          } */
+        if let discard = DiscardView as? DeckView{
+            discard.isEmpty = true
+        }
+        
         addSwipe()
         addRotate()
     }
     
-    override func viewDidLayoutSubviews() {
+    
+//    override func viewDidLayoutSubviews() {
+//        if startGame{
+//            recalculate()
+//        }
+//    }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        recalculate(size: CGSize(width: GridView.frame.width, height: GridView.frame.height))
         
+    }
+    
+    private func recalculate(size : CGSize){
         resetView()
         
-        gridView = Grid(layout: Grid.Layout.aspectRatio(3 / 4), frame: CGRect(x: GridView.layoutMargins.right / 2, y: GridView.layoutMargins.top,width: GridView.bounds.maxX, height: GridView.bounds.maxY ))
+        gridView = Grid(layout: Grid.Layout.aspectRatio(3 / 4), frame: CGRect(x: GridView.layoutMargins.right / 2, y: GridView.layoutMargins.top,width: size.width, height: size.height ))
         
         updateViewFromModel()
     }
@@ -57,6 +81,10 @@ class ViewController: UIViewController {
                 
             }
         }
+    }
+    
+    private func dealThreeCards(){
+        
     }
     
     @IBOutlet weak var Score: UILabel!
@@ -83,19 +111,7 @@ class ViewController: UIViewController {
     
     @IBOutlet var cardButtons: [UIButton]!
     
-    @IBAction func TouchCard(_ sender: UIButton) {
-        
-        if let cardNumber = cardButtons.index(of: sender){
-            updateViewFromModel()
-            game.chooseCard(index: cardNumber)
-            updateViewFromModel()
-            
-            
-        }else{
-            
-        }
-        
-    }
+    
     
     @IBOutlet weak var gameTime: UILabel!
     @IBOutlet weak var computerState: UILabel!
@@ -104,12 +120,26 @@ class ViewController: UIViewController {
     private func updateViewFromModel(){
         resetView()
         drawCards()
+        drawDeck()
+        drawDiscard()
         //drawHighlighted()
         //removeCardsNotInPlay()
         //Score.text = "Score: \(game.Score)"
         
         
     }
+    
+    private func drawDeck(){
+        if game.cards.count > 0{
+            
+        }
+    }
+    
+    private func drawDiscard(){
+        
+    }
+    
+ 
     
     private func drawCards(){
         gridView.cellCount = game.cardsInPlay.count
@@ -142,6 +172,11 @@ class ViewController: UIViewController {
                 let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
                 
                 let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
+                
+                
+                
+                
+                
                 if game.cardsHighlighted[index] != nil{
                     customView.highlightBorder()
                 }
@@ -153,12 +188,34 @@ class ViewController: UIViewController {
                 GridView.addSubview(customView)
                 cards.append(customView)
                 
+//                if dealCards{
+//
+//                    UIView.transition(with: customView,
+//                                      duration: 3.0,
+//                                      options: [.transitionFlipFromLeft],
+//                                      animations: {
+//                                        customView.isFaceUp = true
+//                    } )
+//
+//
+//                }
+                
             }
+            
+            
             
         }
         
-        //let deckView : CardView = CardView(frame : , shape: Shape.none, color : Color.none)
+        //dealCards = false
+        
+        if let card = gridView[0]{
+        let deckView : CardView = CardView(frame : card , shape: Shape.none, color : Color.none, number : Number.none, shading: Shading.none)
             }
+        
+        //dealCards = false
+    }
+    
+    
     
     
     
@@ -175,9 +232,11 @@ class ViewController: UIViewController {
     }
     
     @objc func tap(_ sender: UITapGestureRecognizer){
-        
+        switch sender.state{
+        case .ended:
         if let cardView = sender.view as? CardView{
             
+            if cardView.isFaceUp{
             for cardNumber in 0..<cards.count{
                 if cardView == cards[cardNumber]{
                     
@@ -187,9 +246,25 @@ class ViewController: UIViewController {
                 }
             }
             
+                self.updateViewFromModel()
+            }
+            else{
+//                UIView.transition(with: cardView,
+//                                  duration: 3.0,
+//                                  options: [UIViewAnimationOptions.transitionFlipFromLeft],
+//                                  animations: {
+//                                    cardView.isFaceUp = true
+//
+//                }, completion : { _ in
+//                }
+//                )
+            }
+            
+            
         }
-        updateViewFromModel()
         
+            default : break
+        }
     }
     
     private func addSwipe(){
