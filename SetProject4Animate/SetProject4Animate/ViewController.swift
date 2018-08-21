@@ -21,6 +21,8 @@ class ViewController: UIViewController {
     @IBOutlet weak var DiscardView: UIView!
     @IBOutlet weak var DeckView: UIView!
     
+    
+    
     @IBAction func startGame(_ sender: UIButton) {
         recalculate(size: CGSize(width: GridView.frame.width, height: GridView.frame.height))
         
@@ -59,10 +61,11 @@ class ViewController: UIViewController {
 //        }
 //    }
     
+    
+    
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        recalculate(size: CGSize(width: GridView.frame.height, height: GridView.frame.width))
         super.viewWillTransition(to: size, with: coordinator)
-        recalculate(size: CGSize(width: GridView.frame.width, height: GridView.frame.height))
-        
     }
     
     private func recalculate(size : CGSize){
@@ -88,11 +91,13 @@ class ViewController: UIViewController {
     }
     
     @IBOutlet weak var Score: UILabel!
+    
     @IBAction func addCards(_ sender: UIButton) {
         resetOnGoingGame()
         game.addCards()
         updateViewFromModel()
     }
+    
     @IBAction func NewGame(_ sender: UIButton) {
         time = 0
         game = Set()

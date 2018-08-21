@@ -70,6 +70,7 @@ class CardView: UIView {
         
     }
     
+    
     override func layoutSubviews() {
         switch(color){
         case .Blue:
