@@ -24,7 +24,7 @@ class ViewController: UIViewController {
     
     
     @IBAction func startGame(_ sender: UIButton) {
-        recalculate(size: CGSize(width: GridView.frame.width, height: GridView.frame.height))
+        recalculate()
         
     }
     
@@ -62,16 +62,21 @@ class ViewController: UIViewController {
 //    }
     
     
+    override func viewDidLayoutSubviews() {
+        if startGame{
+        recalculate()
+        }
+    }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
-        recalculate(size: CGSize(width: GridView.frame.height, height: GridView.frame.width))
+        
         super.viewWillTransition(to: size, with: coordinator)
     }
     
-    private func recalculate(size : CGSize){
+    private func recalculate(){
         resetView()
         
-        gridView = Grid(layout: Grid.Layout.aspectRatio(3 / 4), frame: CGRect(x: GridView.layoutMargins.right / 2, y: GridView.layoutMargins.top,width: size.width, height: size.height ))
+        gridView = Grid(layout: Grid.Layout.aspectRatio(3 / 4), frame: CGRect(x: GridView.layoutMargins.right / 2, y: GridView.layoutMargins.top,width: GridView.frame.width, height: GridView.frame.height ))
         
         updateViewFromModel()
     }
@@ -145,7 +150,7 @@ class ViewController: UIViewController {
     }
     
  
-    
+    @objc
     private func drawCards(){
         gridView.cellCount = game.cardsInPlay.count
         /*var index = 0
@@ -169,8 +174,8 @@ class ViewController: UIViewController {
          index += 1
          }*/
         
-        
-        for index in 0..<game.cardsInPlay.count{
+        let index = 0
+        //for index in 0..<game.cardsInPlay.count{
             
             if let frame : CGRect = gridView[index]{
                 let card = game.cardsInPlay[index]
@@ -191,21 +196,26 @@ class ViewController: UIViewController {
                 customView.addGestureRecognizer(tap)
                 
                 GridView.addSubview(customView)
+                
                 cards.append(customView)
                 
-//                if dealCards{
-//
-//                    UIView.transition(with: customView,
-//                                      duration: 3.0,
-//                                      options: [.transitionFlipFromLeft],
-//                                      animations: {
-//                                        customView.isFaceUp = true
-//                    } )
-//
-//
-//                }
                 
-            }
+                if dealCards{
+
+                    UIView.transition(with: GridView.subviews[0],
+                                      duration: 2.0,
+                                      options: [.transitionFlipFromLeft],
+                                      animations: {
+                                        let debouncedFunction = Debouncer(delay: 2.0){
+                                        (self.GridView.subviews[0] as? CardView)?.isFaceUp = true
+                                        }
+                                        debouncedFunction.call()
+                    } )
+
+
+                }
+                
+            //}
             
             
             
