@@ -8,6 +8,10 @@
 
 import UIKit
 
+struct Constants{
+    static var flipTime : Double = 2.0
+}
+
 class ViewController: UIViewController {
     private var gridView : Grid = Grid(layout: Grid.Layout.aspectRatio(1))
     private var game : Set = Set()
@@ -150,9 +154,11 @@ class ViewController: UIViewController {
     }
     
  
-    @objc
+    
     private func drawCards(){
+        
         gridView.cellCount = game.cardsInPlay.count
+        self.view.layoutIfNeeded()
         /*var index = 0
          for tuple in game.cardsInPlay{
          if let frame = gridView[index]{
@@ -174,8 +180,8 @@ class ViewController: UIViewController {
          index += 1
          }*/
         
-        let index = 0
-        //for index in 0..<game.cardsInPlay.count{
+        
+        for index in 0..<game.cardsInPlay.count{
             
             if let frame : CGRect = gridView[index]{
                 let card = game.cardsInPlay[index]
@@ -198,24 +204,28 @@ class ViewController: UIViewController {
                 GridView.addSubview(customView)
                 
                 cards.append(customView)
-                
-                
-                if dealCards{
-
-                    UIView.transition(with: GridView.subviews[0],
-                                      duration: 2.0,
+                delay(Double(index+1)){
+                //let delayedFunction = Debouncer(delay: 2.0){
+                    if self.dealCards{
+                        //let delayedFunction = Debouncer(delay: 2.0){
+                        UIView.transition(with: self.GridView.subviews[index],
+                                      duration: Constants.flipTime,
                                       options: [.transitionFlipFromLeft],
                                       animations: {
-                                        let debouncedFunction = Debouncer(delay: 2.0){
-                                        (self.GridView.subviews[0] as? CardView)?.isFaceUp = true
-                                        }
-                                        debouncedFunction.call()
+                                        //let delayedFunction = Debouncer(delay: 2.0){
+                                        (self.GridView.subviews[index] as? CardView)?.isFaceUp = true
+                                        //}
+                                        //delayedFunction.call()
+                                        
                     } )
 
-
+                        //}
+                        //delayedFunction.call()
                 }
-                
-            //}
+                //}
+                //delayedFunction.call()
+                }
+            }
             
             
             
@@ -230,7 +240,10 @@ class ViewController: UIViewController {
         //dealCards = false
     }
     
-    
+    func delay(_ delay:Double, closure:@escaping ()->()) {
+        DispatchQueue.main.asyncAfter(
+            deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
+    }
     
     
     
