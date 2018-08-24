@@ -16,7 +16,7 @@ class Set{
     var cardsHighlighted :[Int:Card] = [Int:Card]()
     var Score : Int = 0
     var wonRound = false
-    private let startingCards = 12
+    let startingCards = 12
     var maxCards = 81
     var currentCount = 0
     

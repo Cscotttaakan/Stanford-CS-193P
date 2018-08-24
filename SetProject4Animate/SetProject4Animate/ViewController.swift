@@ -9,18 +9,19 @@
 import UIKit
 
 struct Constants{
-    static var flipTime : Double = 2.0
+    static var flipTime : Double = 0.5
+    static var translateTime : Double = 0.5
 }
 
 class ViewController: UIViewController {
     private var gridView : Grid = Grid(layout: Grid.Layout.aspectRatio(1))
     private var game : Set = Set()
-    private var isTimerRunning = false
-    private var time = 0
-    private var timer = Timer()
-    private var cards : [CardView] = [CardView]()
-    private var dealCards : Bool = true
-    private var startGame : Bool = false
+    //private var isTimerRunning = false
+    //private var time = 0
+    //private var timer = Timer()
+    //private var deal : Bool = true
+    //private var startGame : Bool = false
+    //private var startCards : Int = 0
     @IBOutlet weak var GridView: UIView!
     @IBOutlet weak var DiscardView: UIView!
     @IBOutlet weak var DeckView: UIView!
@@ -28,28 +29,13 @@ class ViewController: UIViewController {
     
     
     @IBAction func startGame(_ sender: UIButton) {
-        recalculate()
+        updateViewFromModel()
         
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // initialize button styles
-        /*
-         for index in 0..<cardButtons.count{
-         cardButtons[index].layer.borderWidth = 3.0
-         cardButtons[index].layer.cornerRadius = 8.0
-         cardButtons[index].tintColor = UIColor.clear
-         cardButtons[index].remove()
-         }*/
-        
-        /* gridView.cellCount = game.maxCards
-         for index in 0..<gridView.cellCount{
-         
-         let customView : CardView = CardView(frame: gridView[index]!, shape: .Circle, color: .Blue, number: .One, shading: .Striped)
-         self.view.addSubview(customView)
-         } */
         if let discard = DiscardView as? DeckView{
             discard.isEmpty = true
         }
@@ -59,17 +45,13 @@ class ViewController: UIViewController {
     }
     
     
-//    override func viewDidLayoutSubviews() {
-//        if startGame{
-//            recalculate()
-//        }
-//    }
+    
     
     
     override func viewDidLayoutSubviews() {
-        if startGame{
-        recalculate()
-        }
+        //if startGame{
+        //updateViewFromModel()
+        //  }
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -78,15 +60,12 @@ class ViewController: UIViewController {
     }
     
     private func recalculate(){
-        resetView()
+        //resetView()
         
         gridView = Grid(layout: Grid.Layout.aspectRatio(3 / 4), frame: CGRect(x: GridView.layoutMargins.right / 2, y: GridView.layoutMargins.top,width: GridView.frame.width, height: GridView.frame.height ))
-        
-        updateViewFromModel()
     }
     
     func resetView(){
-        cards.removeAll()
         if GridView.subviews.count > 0{
             GridView.subviews.forEach {
                 $0.removeFromSuperview()
@@ -95,33 +74,20 @@ class ViewController: UIViewController {
         }
     }
     
-    private func dealThreeCards(){
-        
-    }
-    
     @IBOutlet weak var Score: UILabel!
     
     @IBAction func addCards(_ sender: UIButton) {
-        resetOnGoingGame()
+        //resetOnGoingGame()
         game.addCards()
         updateViewFromModel()
     }
     
-    @IBAction func NewGame(_ sender: UIButton) {
-        time = 0
-        game = Set()
-        updateViewFromModel()
-        if(!isTimerRunning){
-            runTimer()
-            isTimerRunning = true
-        }
-    }
-    
+    /*
     func resetOnGoingGame(){
         updateViewFromModel()
         time = 0
         game.clearHighlight()
-    }
+    } */
     
     @IBOutlet var cardButtons: [UIButton]!
     
@@ -132,13 +98,20 @@ class ViewController: UIViewController {
     
     
     private func updateViewFromModel(){
+        
+        
+        let views : [UIView] = GridView.subviews
+        
         resetView()
-        drawCards()
+        recalculate()
+        drawCards(for : views)
+        
+        
         drawDeck()
         drawDiscard()
-        //drawHighlighted()
-        //removeCardsNotInPlay()
-        //Score.text = "Score: \(game.Score)"
+        
+        //To see how many cards are in view before we readd
+        
         
         
     }
@@ -153,105 +126,141 @@ class ViewController: UIViewController {
         
     }
     
- 
-    
-    private func drawCards(){
-        
+    private func drawCards(for views : [UIView]){
         gridView.cellCount = game.cardsInPlay.count
         self.view.layoutIfNeeded()
-        /*var index = 0
-         for tuple in game.cardsInPlay{
-         if let frame = gridView[index]{
-         let card = tuple.value
-         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
-         let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
-         if game.cardsHighlighted[index] != nil{
-         customView.highlightBorder()
-         }
-         else{
-         customView.regularBorder()
-         }
-         customView.addGestureRecognizer(tap)
-         GridView.addSubview(customView)
-         cards.append(customView)
-         
-         }
-         
-         index += 1
-         }*/
+        //We are adding/removing/resizing
         
         
-        for index in 0..<game.cardsInPlay.count{
+        //Using start cards to check if we need to add more cards or remove based on buffer between view and model
+        
+        if views.count > game.cardsInPlay.count{
+            //removeCards()
+            //updateView()
+        }else if views.count <= game.cardsInPlay.count{
+            for index in 0..<game.cardsInPlay.count{
+                addCard(at: index, with : views)
+                checkHighlight(at: index , for : views)
+                
+                print(index)
+            }
             
-            if let frame : CGRect = gridView[index]{
-                let card = game.cardsInPlay[index]
-                let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
-                
-                let customView : CardView = CardView(frame: frame, shape: card.shape, color: card.color, number: card.number, shading: card.shading)
-                
-                
-                
-                
-                
-                if game.cardsHighlighted[index] != nil{
-                    customView.highlightBorder()
+            //addCards()
+            //updateView()
+        }
+        
+        
+        //updateView()
+        
+        
+        
+        
+    }
+    
+    func cardExists(card : CardView) -> Bool{
+        for check in game.cardsInPlay{
+            if (card.color == check.color) && (card.shape == check.shape) && (card.number == check.number) && (card.shading == check.shading){
+                return true
+            }
+        }
+        return false
+    }
+    
+    // MARK: Need to defragment into to pieces
+    // TO-DO: Index at 0
+    
+    func addCard(at index : Int , with array : [UIView]){
+        
+        let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
+        let count = index
+        let time = Double(count+1) / 4
+        let card = game.cardsInPlay[index]
+        if let frame : CGRect = gridView[index]{
+            let customView = CardView(frame : frame, shape : card.shape, color : card.color, number : card.number, shading: card.shading)
+            customView.addGestureRecognizer(tap)
+            
+            
+            // MARK: Fixes the double card deal
+            //WORKING CODE HERE
+            /* if array.count > 0, index < array.count,  let view = array[index] as? CardView , cardExists(card: view){
+                view.isFaceUp = true
+                GridView.addSubview(view)
+                let debouncedFunction = Debouncer(delay: time) {
+                    
+                    UIView.animate(withDuration: 0.5,
+                                   animations: {
+                                    view.frame = frame },
+                                   completion: nil)
                 }
-                else{
-                    customView.regularBorder()
-                }
-                customView.addGestureRecognizer(tap)
-                
+                debouncedFunction.call()
+            }else{
+                customView.frame = CGRect( origin: CGPoint( x: DeckView.frame.origin.x - GridView.frame.origin.x , y: DeckView.frame.origin.y - GridView.frame.origin.y ), size: DeckView.frame.size)
                 GridView.addSubview(customView)
-                
-                cards.append(customView)
-                delay(Double(index+1)){
-                //let delayedFunction = Debouncer(delay: 2.0){
-                    if self.dealCards{
-                        //let delayedFunction = Debouncer(delay: 2.0){
-                        UIView.transition(with: self.GridView.subviews[index],
+                let debouncedFunction = Debouncer(delay : time){
+                    UIView.animate(withDuration: Constants.translateTime,
+                                   animations: {
+                                    customView.frame = frame },
+                                   completion: { position in
+                    UIView.transition(with: customView,
                                       duration: Constants.flipTime,
                                       options: [.transitionFlipFromLeft],
                                       animations: {
-                                        //let delayedFunction = Debouncer(delay: 2.0){
-                                        (self.GridView.subviews[index] as? CardView)?.isFaceUp = true
-                                        //}
-                                        //delayedFunction.call()
+                                      customView.isFaceUp = true
                                         
                     } )
-
-                        //}
-                        //delayedFunction.call()
+                } )
+                    
                 }
-                //}
-                //delayedFunction.call()
+                debouncedFunction.call()
+            } */
+            // WORKING CODE COMMENTED ABOVE
+            
+            
+            // MARK: Causes there to be double dealing of Cards by using delay()
+            // PROBLEM CODE HERE
+            if array.count > 0, index < array.count,  let view = array[index] as? CardView , cardExists(card: view){
+                view.isFaceUp = true
+                GridView.addSubview(view)
+                //DELAY
+                delay(time) {
+                    
+                    UIView.animate(withDuration: 0.5,
+                                   animations: {
+                                    view.frame = frame },
+                                   completion: nil)
+                }
+                
+            }else{
+                customView.frame = CGRect( origin: CGPoint( x: DeckView.frame.origin.x - GridView.frame.origin.x , y: DeckView.frame.origin.y - GridView.frame.origin.y ), size: DeckView.frame.size)
+                GridView.addSubview(customView)
+                //DELAY
+                delay(time){
+                    UIView.animate(withDuration: Constants.translateTime,
+                                   animations: {
+                                    customView.frame = frame },
+                                   completion: { position in
+                                    UIView.transition(with: customView,
+                                                      duration: Constants.flipTime,
+                                                      options: [.transitionFlipFromLeft],
+                                                      animations: {
+                                                        customView.isFaceUp = true
+                                                        
+                                    } )
+                    } )
+                    
                 }
             }
-            
-            
-            
+            //PROBLEM CODE ABOVE
         }
-        
-        //dealCards = false
-        
-        if let card = gridView[0]{
-        let deckView : CardView = CardView(frame : card , shape: Shape.none, color : Color.none, number : Number.none, shading: Shading.none)
-            }
-        
-        //dealCards = false
     }
     
+    //Obsolete DispatchTime depends on Mach
     func delay(_ delay:Double, closure:@escaping ()->()) {
         DispatchQueue.main.asyncAfter(
             deadline: DispatchTime.now() + Double(Int64(delay * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC), execute: closure)
     }
     
-    
-    
     @objc func rotate(_ gestureRecognizer: UIRotationGestureRecognizer){
-        /*if gestureRecognizer.state == .began || gestureRecognizer.state == .changed {
-         gestureRecognizer.view?.transform = gestureRecognizer.view!.transform.rotated(by: gestureRecognizer.rotation)
-         gestureRecognizer.rotation = 0
-         }*/
         if(gestureRecognizer.state == .ended){
             game.reshuffle()
             updateViewFromModel()
@@ -262,36 +271,22 @@ class ViewController: UIViewController {
     @objc func tap(_ sender: UITapGestureRecognizer){
         switch sender.state{
         case .ended:
-        if let cardView = sender.view as? CardView{
-            
-            if cardView.isFaceUp{
-            for cardNumber in 0..<cards.count{
-                if cardView == cards[cardNumber]{
+            if let cardView = sender.view as? CardView{
+                
+                if cardView.isFaceUp{
+                    for cardNumber in 0..<GridView.subviews.count{
+                        if cardView == GridView.subviews[cardNumber]{
+                            game.chooseCard(index: cardNumber)
+                        }
+                    }
                     
-                    game.chooseCard(index: cardNumber)
-                    
-                    
+                    self.updateViewFromModel()
+                }
+                else{
                 }
             }
             
-                self.updateViewFromModel()
-            }
-            else{
-//                UIView.transition(with: cardView,
-//                                  duration: 3.0,
-//                                  options: [UIViewAnimationOptions.transitionFlipFromLeft],
-//                                  animations: {
-//                                    cardView.isFaceUp = true
-//
-//                }, completion : { _ in
-//                }
-//                )
-            }
-            
-            
-        }
-        
-            default : break
+        default : break
         }
     }
     
@@ -309,19 +304,24 @@ class ViewController: UIViewController {
     @objc func swipeDown(_ sender: UITapGestureRecognizer){
         
         
-            
-            game.addCards()
-            updateViewFromModel()
-            
-       
+        
+        game.addCards()
+        updateViewFromModel()
+        
+        
     }
-    
-    private func drawHighlighted(){
-        for key in game.cardsHighlighted.keys{
-            
-            
-            
+    // MARK: Index out of range due to clearing cards before redrawing, need to implement within draw cards.
+    //Checks the model cards and reflects it in the CardView
+    private func checkHighlight(at index : Int , for cards : [UIView]){
+        if cards.count > 0 && index < cards.count{
+            if game.cardsHighlighted[index] != nil{
+                (cards[index] as? CardView)?.highlightBorder()
+            }
+            else{
+                (cards[index] as? CardView)?.regularBorder()
+            }
         }
+        
     }
     
     private func removeCardsNotInPlay(){
@@ -331,8 +331,7 @@ class ViewController: UIViewController {
          }
          }*/
     }
-    
-    
+    /*
     private func runTimer(){
         timer = Timer.scheduledTimer(timeInterval : 1,target : self, selector: (#selector(ViewController.updateTimer)), userInfo: nil, repeats : true)
     }
@@ -371,33 +370,10 @@ class ViewController: UIViewController {
         gameTime.text = "Time: \(time)"
         computerState.text = "Computer: \(game.competitor.state.rawValue)"
         updateViewFromModel()
-    }
+    } */
     
     
 }
-
-
-//Create extension to "draw" the proper button based on NSAttributedString
-/* extension UIButton{
- func draw(string : NSAttributedString?){
- self.layer.borderColor = UIColor.black.cgColor
- self.layer.backgroundColor = #colorLiteral(red: 0.8374180198, green: 0.8374378085, blue: 0.8374271393, alpha: 1)
- self.setAttributedTitle(string,for: UIControlState.normal)
- }
- 
- func highlight(){
- self.layer.borderColor = UIColor.blue.cgColor
- }
- 
- func remove(){
- self.backgroundColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 0)
- self.layer.borderColor = UIColor.clear.cgColor
- self.setAttributedTitle(nil, for: UIControlState.normal)
- }
- 
- 
- }
- */
 
 
 

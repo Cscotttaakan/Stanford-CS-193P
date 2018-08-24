@@ -48,9 +48,9 @@ class CardView: UIView {
         self.layer.borderWidth = 3.0
         self.layer.cornerRadius = 8.0
         self.tintColor = UIColor.clear
-        self.layer.backgroundColor = UIColor.clear.cgColor
+        self.layer.backgroundColor = UIColor.white.cgColor
         self.layer.borderColor = UIColor.darkGray.cgColor
-        self.backgroundColor = UIColor.clear
+        self.backgroundColor = UIColor.white
         
     }
     

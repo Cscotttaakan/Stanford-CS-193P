@@ -18,6 +18,7 @@
 		E122F4DB21082A1D004D5950 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E122F4DA21082A1D004D5950 /* Assets.xcassets */; };
 		E122F4DE21082A1D004D5950 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E122F4DC21082A1D004D5950 /* LaunchScreen.storyboard */; };
 		E147F54821193D41006ADF71 /* Grid.swift in Sources */ = {isa = PBXBuildFile; fileRef = E147F54721193D41006ADF71 /* Grid.swift */; };
+		E184C260212FA2660033F0C9 /* Debouncer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E184C25F212FA2660033F0C9 /* Debouncer.swift */; };
 		E1A7D7E9210D25FC00990089 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1A7D7E8210D25FC00990089 /* CardView.swift */; };
 		E1C98C2721178BD6007EBA2F /* Outline.rtf in Resources */ = {isa = PBXBuildFile; fileRef = E1C98C2621178BD6007EBA2F /* Outline.rtf */; };
 /* End PBXBuildFile section */
@@ -36,6 +37,7 @@
 		E122F4DD21082A1D004D5950 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E122F4DF21082A1D004D5950 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E147F54721193D41006ADF71 /* Grid.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Grid.swift; sourceTree = "<group>"; };
+		E184C25F212FA2660033F0C9 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debouncer.swift; path = "../../../swift-debouncer/Debouncer.swift"; sourceTree = "<group>"; };
 		E1A7D7E8210D25FC00990089 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E1C98C2621178BD6007EBA2F /* Outline.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Outline.rtf; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -70,6 +72,7 @@
 		E122F4D221082A1D004D5950 /* SetProject4Animate */ = {
 			isa = PBXGroup;
 			children = (
+				E184C25F212FA2660033F0C9 /* Debouncer.swift */,
 				E10362A021082B1D004C14FF /* Card.swift */,
 				E10362A121082B1D004C14FF /* computer.swift */,
 				E103629F21082B1D004C14FF /* Set.swift */,
@@ -172,6 +175,7 @@
 				E11BE28F212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift in Sources */,
 				E122F4D621082A1D004D5950 /* ViewController.swift in Sources */,
 				E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */,
+				E184C260212FA2660033F0C9 /* Debouncer.swift in Sources */,
 				E10362A421082B1D004C14FF /* computer.swift in Sources */,
 				E11BE28D212A02BC001F9F2F /* DeckView.swift in Sources */,
 				E147F54821193D41006ADF71 /* Grid.swift in Sources */,
