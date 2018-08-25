@@ -41,18 +41,19 @@ struct Grid
     
     var frame: CGRect { didSet { recalculate() } }
     
-    init(layout: Layout, frame: CGRect = CGRect.zero) {
+    init(layout: Layout, frame: CGRect = CGRect.zero ) {
         self.frame = frame
         self.layout = layout
         recalculate()
     }
     
-    subscript(row: Int, column: Int) -> CGRect? {
+    subscript(row: Int, column: Int) -> UIView? {
         return self[row * dimensions.columnCount + column]
     }
     
-    subscript(index: Int) -> CGRect? {
-        return index < cellFrames.count ? cellFrames[index] : nil
+    subscript(index: Int) -> UIView? {
+        
+        return index < cellFrames.count ? UIView(frame : cellFrames[index]) : nil
     }
     
     var cellCount: Int {

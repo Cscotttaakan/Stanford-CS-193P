@@ -11,7 +11,7 @@
 		E10362A321082B1D004C14FF /* Card.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10362A021082B1D004C14FF /* Card.swift */; };
 		E10362A421082B1D004C14FF /* computer.swift in Sources */ = {isa = PBXBuildFile; fileRef = E10362A121082B1D004C14FF /* computer.swift */; };
 		E11BE28D212A02BC001F9F2F /* DeckView.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BE28C212A02BC001F9F2F /* DeckView.swift */; };
-		E11BE28F212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */; };
+		E11BE28F212A1BDB001F9F2F /* ViewControllerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = E11BE28E212A1BDB001F9F2F /* ViewControllerExtension.swift */; };
 		E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F4D321082A1D004D5950 /* AppDelegate.swift */; };
 		E122F4D621082A1D004D5950 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E122F4D521082A1D004D5950 /* ViewController.swift */; };
 		E122F4D921082A1D004D5950 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E122F4D721082A1D004D5950 /* Main.storyboard */; };
@@ -28,7 +28,7 @@
 		E10362A021082B1D004C14FF /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E10362A121082B1D004C14FF /* computer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = computer.swift; sourceTree = "<group>"; };
 		E11BE28C212A02BC001F9F2F /* DeckView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DeckView.swift; sourceTree = "<group>"; };
-		E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtensionViewController.swift; sourceTree = "<group>"; };
+		E11BE28E212A1BDB001F9F2F /* ViewControllerExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerExtension.swift; sourceTree = "<group>"; };
 		E122F4D021082A1D004D5950 /* SetProject4Animate.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SetProject4Animate.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E122F4D321082A1D004D5950 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E122F4D521082A1D004D5950 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -80,7 +80,7 @@
 				E1A7D7E8210D25FC00990089 /* CardView.swift */,
 				E11BE28C212A02BC001F9F2F /* DeckView.swift */,
 				E122F4D521082A1D004D5950 /* ViewController.swift */,
-				E11BE28E212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift */,
+				E11BE28E212A1BDB001F9F2F /* ViewControllerExtension.swift */,
 				E122F4E521082A2A004D5950 /* SupportingFiles */,
 				E122F4D721082A1D004D5950 /* Main.storyboard */,
 				E122F4DA21082A1D004D5950 /* Assets.xcassets */,
@@ -172,7 +172,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E11BE28F212A1BDB001F9F2F /* ViewControllerExtensionViewController.swift in Sources */,
+				E11BE28F212A1BDB001F9F2F /* ViewControllerExtension.swift in Sources */,
 				E122F4D621082A1D004D5950 /* ViewController.swift in Sources */,
 				E122F4D421082A1D004D5950 /* AppDelegate.swift in Sources */,
 				E184C260212FA2660033F0C9 /* Debouncer.swift in Sources */,
