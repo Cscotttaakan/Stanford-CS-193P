@@ -20,12 +20,6 @@ struct Constants{
 class ViewController: UIViewController {
     private var grid : Grid = Grid(layout: Grid.Layout.aspectRatio(1))
     private var game : Set = Set()
-    //private var isTimerRunning = false
-    //private var time = 0
-    //private var timer = Timer()
-    //private var deal : Bool = true
-    //private var startGame : Bool = false
-    //private var startCards : Int = 0
     @IBOutlet weak var GridView: UIView!
     @IBOutlet weak var DiscardView: UIView!
     @IBOutlet weak var DeckView: UIView!
@@ -54,7 +48,7 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         //if startGame{
-        //updateViewFromModel()
+        updateViewFromModel()
         //  }
     }
     
@@ -87,15 +81,6 @@ class ViewController: UIViewController {
         game.addCards()
         updateViewFromModel()
     }
-    
-    /*
-     func resetOnGoingGame(){
-     updateViewFromModel()
-     time = 0
-     game.clearHighlight()
-     } */
-    
-    @IBOutlet var cardButtons: [UIButton]!
     
     
     
@@ -144,6 +129,7 @@ class ViewController: UIViewController {
         //We are adding/removing/resizing
         
         
+        
         //Using start cards to check if need to add more cards or remove based on buffer between view and model
         
         if views.count > game.cardsInPlay.count{
@@ -189,6 +175,7 @@ class ViewController: UIViewController {
             //updateView()
         }else{
             for index in 0..<game.cardsInPlay.count{
+                self.resizeAndPlaceCard(at: index)
                 self.checkHighlight(at: index)
             }
         }
@@ -234,10 +221,12 @@ class ViewController: UIViewController {
                 if let cellView : UIView = self.grid[index]{
                     let customView = CardView(frame : cellView.frame)
                     customView.isHidden = true
+                    GridView.addSubview(customView)
                     
                     self.move(this : view , fromPositionOf: view, toPositionOf: customView , delay : time){}
-                    self.resize(from : view, to: customView , delay : 0)
                     
+                    self.resize(from : view, to: customView , delay : 0)
+                    GridView.subviews[GridView.subviews.count - 1].removeFromSuperview()
                     
                     
                 }

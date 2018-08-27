@@ -8,7 +8,7 @@
 
 import UIKit
 class DeckView: UIView {
-    var isEmpty = false
+    var isEmpty = true { didSet{setNeedsDisplay() ; setNeedsLayout()} }
     /*
     // Only override draw() if you perform custom drawing.
     // An empty implementation adversely affects performance during animation.

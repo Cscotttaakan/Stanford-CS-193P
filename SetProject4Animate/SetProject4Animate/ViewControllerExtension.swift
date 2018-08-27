@@ -8,28 +8,19 @@
 
 import UIKit
 import Darwin
-extension ViewController{
+extension UIViewController{
     
     //Function that translates card from its position to position A
     //Moving from A to B, in final reference frame you're moving to
     //In this case GridView
     func move( this view : UIView, fromPositionOf A : UIView , toPositionOf B : UIView , delay : Double, callback: @escaping (() -> ()) ){
-        let supAOrigin = A.superview?.frame.origin
-        let supBOrigin = B.superview?.frame.origin
         var endPoint : CGPoint
         
-        if supBOrigin == nil{
-            endPoint = B.frame.origin - supBOrigin
-            
-        } else if supAOrigin == nil{
-            endPoint = B.frame.origin - supAOrigin
-        }
-        else{
-            endPoint = B.frame.origin
-        }
+        //Must subtract view origin and and end frame of reference
+        endPoint = B.frame.origin - view.superview?.frame.origin + B.superview?.frame.origin
         
-        
-        view.frame.origin = A.frame.origin - supBOrigin
+        //Must subtract own frame of reference then add beginning frame of reference
+        view.frame.origin = A.frame.origin - view.superview?.frame.origin + A.superview?.frame.origin
         //let debouncedFunction = Debouncer(delay: delay) {
         UIView.animate(withDuration: Constants.translateTime,
                        animations: {
