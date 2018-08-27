@@ -17,7 +17,7 @@ struct Constants{
     
 }
 
-class ViewController: UIViewController {
+class SetViewController: UIViewController {
     private var grid : Grid = Grid(layout: Grid.Layout.aspectRatio(1))
     private var game : Set = Set()
     @IBOutlet weak var GridView: UIView!

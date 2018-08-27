@@ -10,10 +10,10 @@ import Foundation
 import UIKit
 
 class Set{
-    var cards = [Card]()
+    var cards = [SetCard]()
     var competitor = Computer()
-    var cardsInPlay : [Card] = [Card]()
-    var cardsHighlighted :[Int:Card] = [Int:Card]()
+    var cardsInPlay : [SetCard] = [SetCard]()
+    var cardsHighlighted :[Int:SetCard] = [Int:SetCard]()
     var Score : Int = 0
     var wonRound = false
     let startingCards = 12
@@ -29,7 +29,7 @@ class Set{
             for color in Color.allValues{
                 for number in Number.allValues{
                     for shading in Shading.allValues{
-                        cards.insert(Card(shape: shape as! Shape,color: color as! Color,number: number as! Number,shading: shading as! Shading), at: cards.count.arc4Random)
+                        cards.insert(SetCard(shape: shape as! Shape,color: color as! Color,number: number as! Number,shading: shading as! Shading), at: cards.count.arc4Random)
                         
                     }
                 }
@@ -49,7 +49,7 @@ class Set{
     
     func reshuffle(){
         
-        var shuffledDeck : [Card] = [Card]()
+        var shuffledDeck : [SetCard] = [SetCard]()
         let inPlayCount = cardsInPlay.count
         let deckCount = cards.count
         
@@ -148,8 +148,8 @@ class Set{
     
     //Iterate through cards and check individual matches... For set conformance, match should either be 0 or 2, none or all match
     //To add new property, would have to add another if statement casting the property as AnyProperty<NewProperty>, and new varProperty = 0 to count
-    func checkSet(set : [Int : Card])->Bool{
-        var previousCard : Card = (set.first?.value)!
+    func checkSet(set : [Int : SetCard])->Bool{
+        var previousCard : SetCard = (set.first?.value)!
         for tuple in set{
             previousCard = tuple.value
         }
