@@ -1,3 +1,4 @@
+
 //
 //  ViewController.swift
 //  SetProject2
@@ -9,8 +10,8 @@
 import UIKit
 
 struct Constants{
-    static var flipTime : Double = 1
-    static var translateTime : Double = 1
+    static var flipTime : Double = 0.5
+    static var translateTime : Double = 0.5
     static var origin : CGPoint = CGPoint( x : 0 , y : 0)
     
     
@@ -106,14 +107,13 @@ class ViewController: UIViewController {
         
         
         let views : [UIView] = GridView.subviews
-        
-        resetView()
+        let viewCount = GridView.subviews.count
+        //resetView()
         recalculate()
-        drawCards(for : views)
+        drawCards(for : views , with : viewCount)
         
         
         drawDeck()
-        drawDiscard()
         
         //To see how many cards are in view before we readd
         
@@ -122,36 +122,75 @@ class ViewController: UIViewController {
     }
     
     private func drawDeck(){
+        if let deck = (DeckView as? DeckView){
         if game.cards.count > 0{
-            
+            deck.isEmpty = false
+        }
+        else{
+            deck.isEmpty = true
+        }
         }
     }
     
     private func drawDiscard(){
-        
+        if let discard = (DiscardView as? DeckView){
+        discard.isEmpty = false
+        }
     }
     
-    private func drawCards(for views : [UIView]){
+    private func drawCards(for views : [UIView] , with viewCount : Int){
         grid.cellCount = game.cardsInPlay.count
-        self.view.layoutIfNeeded()
+        //self.view.layoutIfNeeded()
         //We are adding/removing/resizing
         
         
-        //Using start cards to check if we need to add more cards or remove based on buffer between view and model
+        //Using start cards to check if need to add more cards or remove based on buffer between view and model
         
         if views.count > game.cardsInPlay.count{
-            //removeCards()
-            //updateView()
-        }else if views.count <= game.cardsInPlay.count{
-            for index in 0..<game.cardsInPlay.count{
-                addCard(at: index, with : views)
-                checkHighlight(at: index , for : views)
+            
+            for index in 0..<viewCount{
+                self.removeCards(at: index)
+                let debouncedFunction = Debouncer(delay: index.interval()) {
+                    
+                self.resizeAndPlaceCard(at: index)
+                }
+                debouncedFunction.call()
                 
-                print(index)
+                /*for index in removeList{
+                    self.GridView.subviews[index].removeFromSuperview()
+                } */
+                
             }
+            
+            
+            
+            
+            /*for index in removeList{
+                self.GridView.subviews[index].removeFromSuperview()
+            }*/
+                
+        }else if views.count < game.cardsInPlay.count{
+            for index in 0..<game.cardsInPlay.count{
+                let debouncedFunction = Debouncer(delay: index.interval()) {
+                    if index < self.GridView.subviews.count{
+                        self.resizeAndPlaceCard(at: index)
+                }else{
+                        self.addCard(at : index)
+                }
+            }
+                debouncedFunction.call()
+                
+            }
+            
+            
+            
             
             //addCards()
             //updateView()
+        }else{
+            for index in 0..<game.cardsInPlay.count{
+                self.checkHighlight(at: index)
+            }
         }
         
         
@@ -162,51 +201,92 @@ class ViewController: UIViewController {
         
     }
     
-    func cardExists(card : CardView) -> Bool{
-        for check in game.cardsInPlay{
-            if (card.color == check.color) && (card.shape == check.shape) && (card.number == check.number) && (card.shading == check.shading){
-                return true
+    func cardExists(card : CardView) -> Int?{
+        for index in 0..<game.cardsInPlay.count{
+            if (card.color == game.cardsInPlay[index].color) && (card.shape == game.cardsInPlay[index].shape) && (card.number == game.cardsInPlay[index].number) && (card.shading == game.cardsInPlay[index].shading){
+                return index
             }
         }
-        return false
+        return nil
     }
     
     // MARK: Need to defragment into to pieces
     // TO-DO: Index at 0
     
-    func addCard(at index : Int , with array : [UIView]){
+    func removeCards(at index : Int){
+    if let view = self.GridView.subviews[index] as? CardView ,  cardExists( card : view) == nil{
+        (self.GridView.subviews[index] as? CardView)?.regularBorder()
+        self.flipCard(view: self.GridView.subviews[index], delay: index.interval())
+        self.move(this: self.GridView.subviews[index], fromPositionOf: self.GridView.subviews[index], toPositionOf: self.DiscardView, delay: index.interval() ){
+            self.GridView.subviews[index].removeFromSuperview()
+            self.drawDiscard()
+            
+    }
+        self.resize(from: self.GridView.subviews[index], to: self.DiscardView, delay: 0)
+    }
+    }
+    
+    func resizeAndPlaceCard( at index : Int){
+        let time = index.interval()
+        if index < GridView.subviews.count{
+            if self.GridView.subviews.count > 0, index < self.GridView.subviews.count,  let view = self.GridView.subviews[index] as? CardView , let index = self.cardExists(card: view){
+                //self.GridView.addSubview(view)
+                if let cellView : UIView = self.grid[index]{
+                    let customView = CardView(frame : cellView.frame)
+                    customView.isHidden = true
+                    
+                    self.move(this : view , fromPositionOf: view, toPositionOf: customView , delay : time){}
+                    self.resize(from : view, to: customView , delay : 0)
+                    
+                    
+                    
+                }
+                
+                
+            }
+            }
+        }
+        
+        
+        
+        
+        
+    
+    
+    func addCard(at index : Int){
         
         let tap = UITapGestureRecognizer(target: self, action: #selector(self.tap(_:)))
         let time = index.interval()
+        if index < game.cardsInPlay.count{
         let card = game.cardsInPlay[index]
         if let cellView : UIView = grid[index]{
             let customView = CardView(frame : cellView.frame, shape : card.shape, color : card.color, number : card.number, shading: card.shading)
-            customView.addGestureRecognizer(tap)
-
-            if array.count > 0, index < array.count,  let view = array[index] as? CardView , cardExists(card: view){
-                self.GridView.addSubview(view)
-                let debouncedFunction = Debouncer(delay: time) {
-                    
-                    self.move(this : view , fromPositionOf: view, toPositionOf: customView , delay : time){
-                        self.resize(from : view, to: customView , delay : time)
-                    }
-                }
-                debouncedFunction.call()
-            }else{
+            
+            
+                /*if self.GridView.subviews.count > 0, index < self.GridView.subviews.count,  let view = self.GridView.subviews[index] as? CardView , self.cardExists(card: view){
+                 //self.GridView.addSubview(view)
+                 
+                 
+                 self.move(this : view , fromPositionOf: view, toPositionOf: customView , delay : time){}
+                 self.resize(from : view, to: customView , delay : 0)
+                 }else{*/
                 
                 
-                let debouncedFunction = Debouncer(delay : time){
-                    self.GridView.addSubview(customView)
-                    self.move(this: customView, fromPositionOf: self.DeckView,
-                              toPositionOf : customView , delay : time){
-                                
-                                self.flipCard(view: customView , delay : time)
-                    }
-                    
-                    
+                
+                self.GridView.addSubview(customView)
+                self.move(this: customView, fromPositionOf: self.DeckView,
+                          toPositionOf : customView , delay : time){
+                            
+                            self.flipCard(view: customView , delay : time)
+                            customView.addGestureRecognizer(tap)
                 }
-                debouncedFunction.call()
-            }
+                
+                
+                
+                //}
+            
+            
+        }
         }
     }
     
@@ -265,13 +345,13 @@ class ViewController: UIViewController {
     }
     // MARK: Index out of range due to clearing cards before redrawing, need to implement within draw cards.
     //Checks the model cards and reflects it in the CardView
-    private func checkHighlight(at index : Int , for cards : [UIView]){
-        if cards.count > 0 && index < cards.count{
+    private func checkHighlight(at index : Int){
+        if GridView.subviews.count > 0 && index < GridView.subviews.count{
             if game.cardsHighlighted[index] != nil{
-                (cards[index] as? CardView)?.highlightBorder()
+                (GridView.subviews[index] as? CardView)?.highlightBorder()
             }
             else{
-                (cards[index] as? CardView)?.regularBorder()
+                (GridView.subviews[index] as? CardView)?.regularBorder()
             }
         }
         

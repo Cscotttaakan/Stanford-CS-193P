@@ -7,24 +7,37 @@
 //
 
 import UIKit
-
+import Darwin
 extension ViewController{
     
     //Function that translates card from its position to position A
     //Moving from A to B, in final reference frame you're moving to
     //In this case GridView
     func move( this view : UIView, fromPositionOf A : UIView , toPositionOf B : UIView , delay : Double, callback: @escaping (() -> ()) ){
+        let supAOrigin = A.superview?.frame.origin
+        let supBOrigin = B.superview?.frame.origin
+        var endPoint : CGPoint
         
-        let endPoint : CGPoint = B.frame.origin
-        view.frame.origin = A.frame.origin - B.superview?.frame.origin
+        if supBOrigin == nil{
+            endPoint = B.frame.origin - supBOrigin
+            
+        } else if supAOrigin == nil{
+            endPoint = B.frame.origin - supAOrigin
+        }
+        else{
+            endPoint = B.frame.origin
+        }
+        
+        
+        view.frame.origin = A.frame.origin - supBOrigin
         //let debouncedFunction = Debouncer(delay: delay) {
         UIView.animate(withDuration: Constants.translateTime,
                        animations: {
                         view.frame.origin = endPoint },
                        completion: { Void in
-                      callback()
+                callback()
             })
-            
+        
     //}
         
         //debouncedFunction.call()
@@ -40,7 +53,7 @@ extension ViewController{
                               duration: Constants.flipTime,
                               options: [.transitionFlipFromLeft],
                               animations: {
-                                card.isFaceUp = true
+                                card.isFaceUp = !card.isFaceUp
                                 
             } )
             //}
@@ -84,3 +97,5 @@ extension CGPoint{
         
     }
 }
+
+
