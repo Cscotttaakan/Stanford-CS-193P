@@ -20,6 +20,7 @@ struct Constants{
 class SetViewController: UIViewController {
     private var grid : Grid = Grid(layout: Grid.Layout.aspectRatio(1))
     private var game : Set = Set()
+    private var startGame : Bool = false
     @IBOutlet weak var GridView: UIView!
     @IBOutlet weak var DiscardView: UIView!
     @IBOutlet weak var DeckView: UIView!
@@ -28,6 +29,7 @@ class SetViewController: UIViewController {
     
     @IBAction func startGame(_ sender: UIButton) {
         updateViewFromModel()
+        startGame = true
         
     }
     
@@ -47,9 +49,10 @@ class SetViewController: UIViewController {
     
     
     override func viewDidLayoutSubviews() {
-        //if startGame{
-        updateViewFromModel()
-        //  }
+        if startGame{
+            updateViewFromModel()
+        }
+        
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -313,9 +316,8 @@ class SetViewController: UIViewController {
     }
     
     private func addSwipe(){
-        let gesture = UISwipeGestureRecognizer(target: self, action: #selector(swipeDown(_:)))
-        gesture.direction = .down
-        self.view.addGestureRecognizer(gesture)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(swipeDown(_:)))
+        DeckView.addGestureRecognizer(tap)
     }
     
     private func addRotate(){
@@ -324,11 +326,13 @@ class SetViewController: UIViewController {
     }
     
     @objc func swipeDown(_ sender: UITapGestureRecognizer){
-        
-        
-        
+        switch sender.state{
+        case .ended:
         game.addCards()
         updateViewFromModel()
+        default : break
+        }
+        
         
         
     }

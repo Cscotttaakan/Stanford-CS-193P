@@ -187,7 +187,7 @@ class Set{
             }
         }
         
-        //return shapeMatch % 3 == 0 && colorMatch % 3 == 0 && numberMatch % 3 == 0 && shadingMatch % 3 == 0
+        return shapeMatch % 3 == 0 && colorMatch % 3 == 0 && numberMatch % 3 == 0 && shadingMatch % 3 == 0
         return true
   }
     
@@ -196,19 +196,7 @@ class Set{
 
 
 
-extension Int{
-    var arc4Random: Int{
-        if self > 0{
-            return Int(arc4random_uniform(UInt32(self)))
-        }
-        else if self < 0{
-            return -Int(arc4random_uniform(UInt32(self)))
-        }
-        else{
-            return 0
-        }
-    }
-}
+
 
 extension Dictionary {
     mutating func merge(dict: [Key: Value]){
