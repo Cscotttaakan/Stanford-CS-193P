@@ -187,8 +187,8 @@ class Set{
             }
         }
         
-        //return shapeMatch % 3 == 0 && colorMatch % 3 == 0 && numberMatch % 3 == 0 && shadingMatch % 3 == 0
-        return true
+        return shapeMatch % 3 == 0 && colorMatch % 3 == 0 && numberMatch % 3 == 0 && shadingMatch % 3 == 0
+        //return true
   }
     
 
