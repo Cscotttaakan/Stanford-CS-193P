@@ -28,6 +28,8 @@ class SetViewController: UIViewController {
     
     
     @IBAction func startGame(_ sender: UIButton) {
+        game = Set()
+        resetView()
         updateViewFromModel()
         startGame = true
         
@@ -122,7 +124,11 @@ class SetViewController: UIViewController {
     
     private func drawDiscard(){
         if let discard = (DiscardView as? DeckView){
+            if game.cards.count < game.maxCards{
         discard.isEmpty = false
+            } else{
+                discard.isEmpty = true
+            }
         }
     }
     
@@ -141,8 +147,9 @@ class SetViewController: UIViewController {
                 self.removeCards(at: index)
                 let debouncedFunction = Debouncer(delay: index.interval()) {
                     
-                self.resizeAndPlaceCard(at: index)
+                
                 }
+                self.resizeAndPlaceCard(at: index)
                 debouncedFunction.call()
                 
                 /*for index in removeList{
