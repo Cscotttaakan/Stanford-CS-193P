@@ -44,7 +44,7 @@
 		E184C25F212FA2660033F0C9 /* Debouncer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Debouncer.swift; path = "../../../swift-debouncer/Debouncer.swift"; sourceTree = "<group>"; };
 		E184C2622134B7A50033F0C9 /* Concentration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Concentration.swift; path = ../../Concentration/Concentration/Concentration.swift; sourceTree = "<group>"; };
 		E184C2632134B7A50033F0C9 /* ConcentrationThemeChooserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConcentrationThemeChooserViewController.swift; path = ../../Concentration/Concentration/ConcentrationThemeChooserViewController.swift; sourceTree = "<group>"; };
-		E184C2642134B7A50033F0C9 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Card.swift; path = ../../Concentration/Concentration/Card.swift; sourceTree = "<group>"; };
+		E184C2642134B7A50033F0C9 /* Card.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Card.swift; sourceTree = "<group>"; };
 		E184C2652134B7A50033F0C9 /* ConcentrationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ConcentrationViewController.swift; path = ../../Concentration/Concentration/ConcentrationViewController.swift; sourceTree = "<group>"; };
 		E1A7D7E8210D25FC00990089 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		E1C98C2621178BD6007EBA2F /* Outline.rtf */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; path = Outline.rtf; sourceTree = "<group>"; };
@@ -116,7 +116,8 @@
 				E184C2632134B7A50033F0C9 /* ConcentrationThemeChooserViewController.swift */,
 				E184C2652134B7A50033F0C9 /* ConcentrationViewController.swift */,
 			);
-			path = Concentration;
+			name = Concentration;
+			path = ../Concentration/Concentration;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
