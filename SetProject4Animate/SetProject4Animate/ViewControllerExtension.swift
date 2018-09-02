@@ -54,6 +54,7 @@ extension UIViewController{
     
     //Function that pushes goes from size A to Size B
     func resize( from A : UIView , to B : UIView , delay : Double){
+        
         let debouncedFunction = Debouncer(delay: delay) {
         UIView.animate(withDuration: Constants.translateTime,
                        animations: {
@@ -61,6 +62,7 @@ extension UIViewController{
                        completion: nil)
     }
         debouncedFunction.call()
+    
     }
     
     
