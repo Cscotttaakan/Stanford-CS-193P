@@ -12,6 +12,8 @@
 		E15A4B62213B6E5E00DC6293 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E15A4B61213B6E5E00DC6293 /* Assets.xcassets */; };
 		E15A4B65213B6E5E00DC6293 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E15A4B63213B6E5E00DC6293 /* LaunchScreen.storyboard */; };
 		E15A4B6E213B708700DC6293 /* ImageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E15A4B6D213B708700DC6293 /* ImageViewController.swift */; };
+		E1B33531213C42EC0065AE67 /* DemoURLs.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1B3352F213C42EC0065AE67 /* DemoURLs.swift */; };
+		E1B33532213C42EC0065AE67 /* oval.jpg in Resources */ = {isa = PBXBuildFile; fileRef = E1B33530213C42EC0065AE67 /* oval.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		E15A4B64213B6E5E00DC6293 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		E15A4B66213B6E5E00DC6293 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E15A4B6D213B708700DC6293 /* ImageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewController.swift; sourceTree = "<group>"; };
+		E1B3352F213C42EC0065AE67 /* DemoURLs.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DemoURLs.swift; path = "../../../../Downloads/CS193P-iOS11-Lecture-9-ViewController-LifeCycle-and-ScrollViews-master/Lecture 9 - Cassini/DemoURLs.swift"; sourceTree = "<group>"; };
+		E1B33530213C42EC0065AE67 /* oval.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; name = oval.jpg; path = "../../../../Downloads/CS193P-iOS11-Lecture-9-ViewController-LifeCycle-and-ScrollViews-master/Lecture 9 - Cassini/oval.jpg"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +58,8 @@
 		E15A4B59213B6E5B00DC6293 /* Cassini */ = {
 			isa = PBXGroup;
 			children = (
+				E1B3352F213C42EC0065AE67 /* DemoURLs.swift */,
+				E1B33530213C42EC0065AE67 /* oval.jpg */,
 				E15A4B6C213B703B00DC6293 /* Supporting Files */,
 				E15A4B5E213B6E5B00DC6293 /* Main.storyboard */,
 				E15A4B66213B6E5E00DC6293 /* Info.plist */,
@@ -131,6 +137,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				E15A4B65213B6E5E00DC6293 /* LaunchScreen.storyboard in Resources */,
+				E1B33532213C42EC0065AE67 /* oval.jpg in Resources */,
 				E15A4B62213B6E5E00DC6293 /* Assets.xcassets in Resources */,
 				E15A4B60213B6E5B00DC6293 /* Main.storyboard in Resources */,
 			);
@@ -145,6 +152,7 @@
 			files = (
 				E15A4B6E213B708700DC6293 /* ImageViewController.swift in Sources */,
 				E15A4B5B213B6E5B00DC6293 /* AppDelegate.swift in Sources */,
+				E1B33531213C42EC0065AE67 /* DemoURLs.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
