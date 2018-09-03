@@ -8,44 +8,73 @@
 
 import UIKit
 
-class ImageViewController: UIViewController {
-    @IBOutlet weak var imageView: UIImageView!
+class ImageViewController: UIViewController, UIScrollViewDelegate {
     
-    var imageURL : URL?{
+    var imageView = UIImageView()
+    
+    @IBOutlet weak var scrollView: UIScrollView! {
         didSet{
-            imageView.image = nil
-            if view.window != nil{
+            scrollView.minimumZoomScale = 1 / 25
+            scrollView.maximumZoomScale = 1.0
+            scrollView.delegate = self
+            scrollView.addSubview(imageView)
+        }
+    }
+    
+    
+   
+    var imageURL: URL? {
+        didSet {
+            image = nil
+            if view.window != nil {     // we're on Screen!!
                 fetchImage()
             }
         }
     }
     
+    var image: UIImage? {
+        get {
+            return imageView.image
+        }
+        set {
+            imageView.image = newValue
+            imageView.sizeToFit()
+            scrollView.contentSize = imageView.frame.size
+        }
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        
-        if imageView == nil{
+        if imageView.image == nil {
             fetchImage()
+        }
+    }
+    
+    func viewForZooming(in scrollView: UIScrollView) -> UIView? {
+        
+        return imageView
+        
+    }
+    
+    
+    
+    //var imageView = UIImageView()
+    
+    private func fetchImage() {
+        if let url = imageURL {
+            let urlContents = try? Data(contentsOf: url)
+            if let imageData = urlContents {
+                image = UIImage(data: imageData)
+            }
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
-    }
-    
-    private func fetchImage(){
-        if let url = imageURL {
-           
-            let urlContents = try? Data(contentsOf: url)
-            
-            if let imageData = urlContents{
-                imageView.image = UIImage(data : imageData)
-            }
-            
+        if imageURL == nil {
+            imageURL = DemoURLs.stanford
         }
     }
-    
     
 
 }

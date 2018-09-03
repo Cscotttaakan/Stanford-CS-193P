@@ -17,21 +17,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="1eB-5c-heV">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="JSd-pG-ri8">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
+                                <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" placeholderIntrinsicWidth="375" placeholderIntrinsicHeight="667" translatesAutoresizingMaskIntoConstraints="NO" id="1eB-5c-heV">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="1eB-5c-heV" firstAttribute="leading" secondItem="JSd-pG-ri8" secondAttribute="leading" id="Cpi-r1-DWe"/>
+                                    <constraint firstItem="1eB-5c-heV" firstAttribute="trailing" secondItem="JSd-pG-ri8" secondAttribute="trailing" id="F18-no-dOY"/>
+                                    <constraint firstItem="1eB-5c-heV" firstAttribute="top" secondItem="JSd-pG-ri8" secondAttribute="top" id="Hsd-sB-BYx"/>
+                                    <constraint firstItem="1eB-5c-heV" firstAttribute="bottom" secondItem="JSd-pG-ri8" secondAttribute="bottom" id="uKN-cH-kjb"/>
+                                </constraints>
+                            </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="1eB-5c-heV" firstAttribute="top" secondItem="EwH-hv-oGO" secondAttribute="top" id="U6z-Li-9lY"/>
-                            <constraint firstItem="1eB-5c-heV" firstAttribute="trailing" secondItem="EwH-hv-oGO" secondAttribute="trailing" id="VFe-Yd-M1t"/>
-                            <constraint firstItem="1eB-5c-heV" firstAttribute="leading" secondItem="EwH-hv-oGO" secondAttribute="leading" id="bG9-Qg-ysX"/>
-                            <constraint firstItem="1eB-5c-heV" firstAttribute="bottom" secondItem="EwH-hv-oGO" secondAttribute="bottom" id="zAk-Hl-241"/>
+                            <constraint firstItem="JSd-pG-ri8" firstAttribute="leading" secondItem="EwH-hv-oGO" secondAttribute="leading" id="QlT-va-sUJ"/>
+                            <constraint firstItem="JSd-pG-ri8" firstAttribute="trailing" secondItem="EwH-hv-oGO" secondAttribute="trailing" id="bB5-uN-5NS"/>
+                            <constraint firstItem="JSd-pG-ri8" firstAttribute="bottom" secondItem="EwH-hv-oGO" secondAttribute="bottom" id="fIB-rl-HIr"/>
+                            <constraint firstItem="JSd-pG-ri8" firstAttribute="top" secondItem="EwH-hv-oGO" secondAttribute="top" id="kSB-c1-ETU"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="O4n-zC-lJv"/>
                     </view>
                     <connections>
-                        <outlet property="imageView" destination="1eB-5c-heV" id="NWL-gL-XNs"/>
+                        <outlet property="scrollView" destination="JSd-pG-ri8" id="THE-fQ-Iwo"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="XN6-uB-cFG" userLabel="First Responder" sceneMemberID="firstResponder"/>
