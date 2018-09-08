@@ -17,14 +17,31 @@ class CassiniViewController: UIViewController {
         // Get the new view controller using segue.destination.
         // Pass the selected object to the new view controller.
         
-        if let identifier = segue.identifier, let url = DemoURLs.NASA[identifier],
-           let imageVC = segue.destination as? ImageViewController {
+        if let identifier = segue.identifier, let url = DemoURLs.NASA[identifier]{
+           
+            
+           if let imageVC = segue.destination.contents  as? ImageViewController {
             imageVC.imageURL = url
             imageVC.title = (sender as? UIButton)?.currentTitle
+                
+            }
             
         }
         
     }
     
 
+}
+
+extension UIViewController{
+    
+    var contents : UIViewController {
+        if let navcon = self as? UINavigationController{
+            return navcon.visibleViewController ?? self
+        } else {
+            return self
+        }
+    }
+    
+    
 }

@@ -46,14 +46,16 @@ class ConcentrationViewController: UIViewController {
     
     var numberOfPairsOfCards: Int{
         
-        return (cardButtons.count+1)/2
+        return (visibleButtons.count+1)/2
         
     }
     //Swift is extremely type-cast heavy, but also
     //type inference heavy.
     
     
-    
+    private var visibleButtons : [UIButton]! {
+        return cardButtons?.filter{  !$0.superview!.isHidden }
+    }
     
     private func updateFlipCount(count : Int){
         let attributes: [NSAttributedStringKey:Any] = [
@@ -85,14 +87,14 @@ class ConcentrationViewController: UIViewController {
     
     
     @IBAction func NewGame(_ sender: UIButton) {
-        game = Concentration(numberOfPairsOfCards: (cardButtons.count+1)/2)
+        game = Concentration(numberOfPairsOfCards: (visibleButtons.count+1)/2)
         updateViewFromModel()
     }
     
     
     //We now have connected the second button
     //to this function.
-    //We are now using array of labels in cardButtons variable
+    //We are now using array of labels in visibleButtons variable
     @IBAction private func TouchCard(_ sender: UIButton) {
         
         //The use of optionals:
@@ -101,7 +103,7 @@ class ConcentrationViewController: UIViewController {
         //Will throw error if contains nil, so we use if let
         //to use a condition to check if the optional contains an unwrappable
         //value
-        if let cardNumber = cardButtons.index(of: sender)
+        if let cardNumber = visibleButtons.index(of: sender)
         {
             game.chooseCard(at: cardNumber)
             
@@ -123,15 +125,15 @@ class ConcentrationViewController: UIViewController {
     
     
     //This is using MVC design, have Concentration class & Card Class
-    //Using update view from model, we only use cardButtons which is from
+    //Using update view from model, we only use visibleButtons which is from
     //the story board. We then use the game variable to access its card
     //array. We drastically reduce code using this format.
     private  func updateViewFromModel(){
-        guard cardButtons != nil else { return }
+        guard visibleButtons != nil else { return }
         let count = game.flipCount
         let score = game.score
-        for index in cardButtons.indices{
-            let button = cardButtons[index]
+        for index in visibleButtons.indices{
+            let button = visibleButtons[index]
             let card = game.cards[index]
             
             
@@ -148,7 +150,7 @@ class ConcentrationViewController: UIViewController {
         }
         
         updateFlipCount(count: count)
-        gameScore.text = "Game Score: \(score)";
+        //gameScore.text = "Game Score: \(score)";
         
     }
     
