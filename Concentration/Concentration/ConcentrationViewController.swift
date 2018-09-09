@@ -62,9 +62,16 @@ class ConcentrationViewController: UIViewController {
             .strokeWidth: 5.0,
             .strokeColor: #colorLiteral(red: 0.6666666865, green: 0.6666666865, blue: 0.6666666865, alpha: 1)
         ]
-        let attributedString = NSAttributedString(string: "Flips: \(count)",attributes :attributes )
+        let attributedString = NSAttributedString(
+            string: traitCollection.verticalSizeClass == .compact ? "Flips \n \(count)" : "Flips: \(count)",
+            attributes :attributes )
         flipCountLabel.attributedText = attributedString
         
+    }
+    
+    override func traitCollectionDidChange(_ previousTraitCollection: UITraitCollection?) {
+         super.traitCollectionDidChange(previousTraitCollection)
+         updateFlipCount(count: game.flipCount)
     }
     
     private func initializeFlipCount(){
