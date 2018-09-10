@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 48;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E1094CBD21455C5E007073FF /* EmojiArtDocumentTable.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1094CBC21455C5E007073FF /* EmojiArtDocumentTable.swift */; };
 		E1186F5021447A9F0046AE79 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = E1186F4F21447A9F0046AE79 /* AppDelegate.swift */; };
 		E1186F5521447A9F0046AE79 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E1186F5321447A9F0046AE79 /* Main.storyboard */; };
 		E1186F5721447AA30046AE79 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E1186F5621447AA30046AE79 /* Assets.xcassets */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		E1094CBC21455C5E007073FF /* EmojiArtDocumentTable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiArtDocumentTable.swift; sourceTree = "<group>"; };
 		E1186F4C21447A9F0046AE79 /* EmojiArt.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EmojiArt.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E1186F4F21447A9F0046AE79 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		E1186F5421447A9F0046AE79 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -59,6 +61,7 @@
 			isa = PBXGroup;
 			children = (
 				E1186F5321447A9F0046AE79 /* Main.storyboard */,
+				E1094CBC21455C5E007073FF /* EmojiArtDocumentTable.swift */,
 				E1186F6421447B200046AE79 /* EmojiArtView.swift */,
 				E1186F6121447AB20046AE79 /* SupportFiles */,
 				E1186F5B21447AA30046AE79 /* Info.plist */,
@@ -110,11 +113,12 @@
 				TargetAttributes = {
 					E1186F4B21447A9E0046AE79 = {
 						CreatedOnToolsVersion = 10.0;
+						ProvisioningStyle = Automatic;
 					};
 				};
 			};
 			buildConfigurationList = E1186F4721447A9E0046AE79 /* Build configuration list for PBXProject "EmojiArt" */;
-			compatibilityVersion = "Xcode 9.3";
+			compatibilityVersion = "Xcode 8.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
 			knownRegions = (
@@ -152,6 +156,7 @@
 				E1186F5021447A9F0046AE79 /* AppDelegate.swift in Sources */,
 				E1186F6321447AE80046AE79 /* EmojiArtViewController.swift in Sources */,
 				E1186F6721449C730046AE79 /* Utilities.swift in Sources */,
+				E1094CBD21455C5E007073FF /* EmojiArtDocumentTable.swift in Sources */,
 				E1186F6521447B200046AE79 /* EmojiArtView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -288,8 +293,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
-				SWIFT_COMPILATION_MODE = wholemodule;
-				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -301,10 +305,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 54CWFH9J2G;
 				INFOPLIST_FILE = EmojiArt/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CraigScottDev.EmojiArt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
@@ -319,10 +321,8 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 54CWFH9J2G;
 				INFOPLIST_FILE = EmojiArt/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-				);
+				IPHONEOS_DEPLOYMENT_TARGET = 11.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = CraigScottDev.EmojiArt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.2;
